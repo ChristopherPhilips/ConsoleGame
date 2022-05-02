@@ -115,7 +115,17 @@ Module Program
         Dim background As List(Of String) = New List(Of String)
         Dim oneRow As String = "|==========================================================================================================================================|"
         For i = 0 To 60 - 1 Step 1
-            background.Add(oneRow)
+            Dim builder As New System.Text.StringBuilder
+            For ColIter As Integer = 1 To 140
+                Dim ranNumer As Integer = Int((5 * Rnd()) + 1)
+                If ranNumer = 3 Then
+                    builder.Append("*"c)
+                Else
+                    builder.Append("&"c)
+                End If
+            Next
+
+            background.Add(builder.ToString)
         Next
         Return background
     End Function
