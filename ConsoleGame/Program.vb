@@ -33,7 +33,7 @@ Module Program
 
         InitlocationObjAry()
 
-        Dim player = New Crewmate(5, (5, 5), New List(Of String) From {"OO", "OO"})
+        Dim player = New Crewmate(5, (6, 100), New List(Of String) From {"OO", "OO"})
         gameObjects.Add(player)
 
         Dim spaceship = New SolidGameObj(3, (5, getSpaceship.Count - 1), getSpaceship)
@@ -121,7 +121,7 @@ Module Program
                 If ranNumer = 3 Then
                     builder.Append("*"c)
                 Else
-                    builder.Append("&"c)
+                    builder.Append(" "c)
                 End If
             Next
 
