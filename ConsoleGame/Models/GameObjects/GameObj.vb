@@ -8,6 +8,7 @@
     Public Property isCollidable = False
     Public Property occupying As Array 'array of tiles occupied, locationObj(x,y)
 
+    Private defaultColourmap As List(Of String) = New List(Of String) From {""}
     Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String))
         Me.location = location
         Me.sprite = sprite
@@ -16,7 +17,7 @@
         Me.spritechars = New CharObj(sprite.Count - 1, sprite(0).Length - 1) {}
         Me.occupying = New LocationObj(sprite.Count - 1, sprite(0).Length - 1) {}
     End Sub
-    Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String))
+    Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String)) 'todo: combine new methods and implement a default colourmap
         Me.location = location
         Me.sprite = sprite
         Me.priority = priority
@@ -50,7 +51,7 @@
 
         For i = 0 To spritechars.GetUpperBound(0) Step 1 'rowloop
             For j = 0 To spritechars.GetUpperBound(1) Step 1 'length loop
-                returnList.Add(locationObjAry(ourZeroX + i, ourZeroY + j))
+                returnList.Add(locationObjAry(ourZeroX + i, ourZeroY + j)) 'todo:replace this with reference to parent
             Next j
         Next i
 
@@ -79,6 +80,7 @@
         Dim spriteHeight = spritechars.GetUpperBound(0)
         Dim spriteWidth = spritechars.GetUpperBound(1)
 
+        Dim charAndLocation As List(Of (CharObj, Integer, Integer)) = New List(Of (CharObj, Integer, Integer)) From {}
 
         For i = 0 To spriteHeight Step 1 'rowloop
             For j = 0 To spriteWidth Step 1 'length loop
@@ -88,8 +90,11 @@
 
                 Else
 
-                    locationObjAry(ourZeroX + i, ourZeroY + j).addChar(spritechars(i, j))
-                    occupying(i, j) = locationObjAry(ourZeroX + i, ourZeroY + j)
+
+                    charAndLocation.Add((spritechars(i, j), ourZeroX + i, ourZeroY + j))
+
+
+                    'occupying(i, j) = locationObjAry(ourZeroX + i, ourZeroY + j) 'todo: change who handles collision handling?? rn its done in the object
 
 
                 End If
