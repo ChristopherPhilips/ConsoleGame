@@ -4,7 +4,7 @@
     Public Property location As (Integer, Integer)
     Public Property sprite As List(Of String) 'raw art as list(str)
     Public Property colourmap As List(Of String) = New List(Of String) From {}
-    Public Property spritechars As Array
+    Public Property spritechars As Array 'populated by render()
     Public Property isCollidable = False
     Public Property occupying As Array 'array of tiles occupied, locationObj(x,y)
 
@@ -14,7 +14,7 @@
         Me.priority = priority
 
         Me.spritechars = New CharObj(sprite.Count, sprite(0).Length) {}
-        Me.occupying = New LocationObj(sprite.Count, sprite(0).Length) {}
+        Me.occupying = New LocationObj(sprite.Count - 1, sprite(0).Length - 1) {}
         render()
     End Sub
     Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String))
@@ -24,10 +24,10 @@
         Me.colourmap = colourmap
 
         Me.spritechars = New CharObj(sprite.Count, sprite(0).Length) {}
-        Me.occupying = New LocationObj(sprite.Count, sprite(0).Length) {}
+        Me.occupying = New LocationObj(sprite.Count - 1, sprite(0).Length - 1) {}
         render()
     End Sub
-    Public Sub move(deltaxy As (Integer, Integer))
+    Public Overridable Sub move(deltaxy As (Integer, Integer))
         remove()
 
         Dim oldx = location.Item1
@@ -41,6 +41,27 @@
         Me.didChange = True
 
     End Sub
+
+    Public Function lookAhead(deltaxy As (Integer, Integer)) As List(Of LocationObj)
+        Dim returnList As List(Of LocationObj) = New List(Of LocationObj)
+
+        'iterate over my size
+        'write a reference to the location objects at those idicies
+        Dim ourZeroX = location.Item1 + deltaxy.Item1
+        Dim ourZeroY = location.Item2 + deltaxy.Item2
+
+        For i = 0 To spritechars.GetUpperBound(0) - 1 Step 1 'rowloop
+            For j = 0 To spritechars.GetUpperBound(1) - 1 Step 1 'length loop
+                returnList.Add(locationObjAry(ourZeroX + i, ourZeroY + j))
+            Next j
+        Next i
+
+        Return returnList
+    End Function
+
+
+
+
     Public Sub remove()
         Dim ourZeroX = location.Item1
         Dim ourZeroY = location.Item2
@@ -64,7 +85,7 @@
 
         For i = 0 To spritechars.GetUpperBound(0) - 1 Step 1 'rowloop
             For j = 0 To spritechars.GetUpperBound(1) - 1 Step 1 'length loop
-                If spritechars(i, j).CellChar = "&"c Then
+                If spritechars(i, j).CellChar = "Ý"c Then
                     'do nothing if the char in a slot is &
                 ElseIf spritechars(i, j).CellChar = "ý"c Then
                     'this reserved for if we want squares to be part of the gameObj but not rendered as a char

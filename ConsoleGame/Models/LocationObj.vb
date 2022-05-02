@@ -1,7 +1,7 @@
 ﻿Public Class LocationObj
     Public Property toPrint As String = "&"
     Public Property HighestPriorityChar As CharObj
-    Private Property competingChars As List(Of CharObj) = New List(Of CharObj) 'todo: make this work lol
+    Public Property competingChars As List(Of CharObj) = New List(Of CharObj) 'todo: make this work lol
     Public Property location As (Integer, Integer)
 
     Dim emptycharj = New CharObj(New GameObj(-50, (0, 0), New List(Of String) From {""}))

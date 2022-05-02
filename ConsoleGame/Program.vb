@@ -1,4 +1,4 @@
-Imports System
+﻿Imports System
 Imports Spectre.Console
 Module Program
     Dim gameWidth As Integer = 140
@@ -33,11 +33,12 @@ Module Program
 
         InitlocationObjAry()
 
-        Dim player = New Crewmate(5, (1, 1), New List(Of String) From {"O&O", "&>&", "---"})
+        Dim player = New Crewmate(5, (5, 5), New List(Of String) From {"OO", "OO"})
         gameObjects.Add(player)
 
         Dim spaceship = New SolidGameObj(3, (5, getSpaceship.Count - 1), getSpaceship)
         gameObjects.Add(spaceship)
+
         Dim gamerunning = True
         While gamerunning
 
@@ -71,7 +72,7 @@ Module Program
             CleanupScreen()
             Threading.Thread.Sleep(1)
             Console.SetCursorPosition(0, 61)
-            Console.WriteLine(locationObjAry(5, 5).toString)
+            Console.WriteLine(player.ToString)
 
         End While
 
@@ -110,7 +111,7 @@ Module Program
 
     End Sub
 
-    Function backgroundsprite() As List(Of String)
+    Function backgroundsprite() As List(Of String) 'todo:generate the background
         Dim background As List(Of String) = New List(Of String)
         Dim oneRow As String = "|==========================================================================================================================================|"
         For i = 0 To 60 - 1 Step 1
@@ -120,55 +121,26 @@ Module Program
     End Function
 
     Function getSpaceship() As List(Of String)
-        Dim spaceship As List(Of String) = New List(Of String) From {
-"&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&&",
-"&&&&&&&&&&&&&/  \&&&&&&&&&&&&&&",
-"&&&&&&&&&&&/      \&&&&&&&&&&&&",
-"&&&&&&&&&/          \&&&&&&&&&& ",
-"&&&&&&&&|     /\     |&&&&&&&&&",
-"&&&&&&&&|    /  \    |&&&&&&&&&",
-"&&&&&&&&|   /    \   |&&&&&&&&&",
-"&&&&&&&&|  | (  ) |  |&&&&&&&&&",
-"&&&&&&&&|  | (  ) |  |&&&&&&&&&",
-"&&&/\&&&|  |      |  |&&&/\&&&&",
-"&&/  \&&|  |      |  |&&/  \&&&",
-"&|----|&|  |      |  |&|----|&&",
-"&|    |&| /|   .  |\ |&|    |&&",
-"&|    |&/  |   .  |  \&|    |&&",
-"&|    /    |   .  |    \    |&&",
-"&|  /      |   .  |      \  |&&",
-"&|/        |   .  |        \|&&",
-"/   NASA   |   .  |  NASA    \&",
-"(          |      |           )",
-"&|    | |--|      |--| |    |&&",
-"&&/  \&&&&&/  \/  \&&&&&/  \&&&",
-"&&\\//&&&&&\\//\\//&&&&&\\//&&&",
-"&&&\/&&&&&&&\/&&\/&&&&&&&\/&&&&"
-}
-        Return spaceship
+        Dim spaceshit8 As List(Of String) = New List(Of String) From {
+        "ÝÝÝÝÝÝÝ/=\ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝ/=-=\>ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝ/=-----=\ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝ(}/    \-\-=\>ÝÝÝÝÝÝÝÝÝÝÝÝ/=--=\ÝÝ",
+        "Ý>=O/        \+  +\=-=---=--=/     })Ý",
+        "ÝÝÝÝ|                              @()",
+        "Ý>=O\        /+  +/=--=-=---=\     })Ý",
+        "ÝÝÝÝ(}\    /-/-=/>ÝÝÝÝÝÝÝÝÝÝÝÝ\=--=/ÝÝ",
+        "ÝÝÝÝÝ\=-----=/ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝ\=-=/>ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝÝ\=/ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ"
+        }
+        Return spaceshit8
+        Dim smallspaceship As List(Of String) = New List(Of String) From {
+            "   __       ",
+            "   \ \_____. ",
+            "###[==_____>",
+            "   /_/      "
+        }
     End Function
-    Function getSpaceship2() As List(Of String)
-        Dim spaceship As List(Of String) = New List(Of String) From {
-"&&&&&&&&&&&&&&/ \&&&&&&&&&&&&&&&",
-"&&&&&&&&&&&&&/   \&&&&&&&&&&&&&&",
-"&&&&&&&&&&&&/ / \ \&&&&&&&&&&&&&",
-"&&&&&&&&&&&| (   ) |&&&&&&&&&&&&",
-"&&&&&&&&&&&|  | |  |&&&&&&&&&&&&",
-"&&&/\&&&&&&|  | |  |&&&&&&/\&&&&",
-"&&/  \&&&&&|  | |  |&&&&&/  \&&&",
-"&|----|&&&&|  | |  |&&&&|----|&&",
-"&|    |&&&/|  | |  |\&&&|    |&&",
-"&|    |&/  |  | |  |  \&|    |&&",
-"&|    /    |  | |  |    \    |&&",
-"&|  /      |  | |  |      \  |&&",
-"&|/        |  | |  |        \|&&",
-"/   NASA   |  | |  |  NASA    \&",
-"(          |  |_|  |           )",
-"&|    | |--|   _   |--| |    |&&",
-"&&/  \&&&&&/  \&/  \&&&&&/  \&&&",
-"&&\\//&&&&&\\//&\\//&&&&&\\//&&&",
-"&&&\/&&&&&&&\/&&&\/&&&&&&&\/&&&&"
-}
-        Return spaceship
-    End Function
+
 End Module
