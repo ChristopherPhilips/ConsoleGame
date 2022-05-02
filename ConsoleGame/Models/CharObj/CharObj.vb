@@ -5,7 +5,7 @@
     Public Property notPassable = False
     Public Property parentGameObj As GameObj 'i believe this just passes a pointer
     Public Sub New(parentGameObj As GameObj)
-        Me.CellChar = "&"c
+        Me.CellChar = " "c
         Me.parentGameObj = parentGameObj
     End Sub
     Public Sub New(CellChar As Char, colour As String, parentGameObj As GameObj)

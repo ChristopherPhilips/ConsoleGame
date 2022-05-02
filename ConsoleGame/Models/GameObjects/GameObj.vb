@@ -13,9 +13,8 @@
         Me.sprite = sprite
         Me.priority = priority
 
-        Me.spritechars = New CharObj(sprite.Count, sprite(0).Length) {}
+        Me.spritechars = New CharObj(sprite.Count - 1, sprite(0).Length - 1) {}
         Me.occupying = New LocationObj(sprite.Count - 1, sprite(0).Length - 1) {}
-        render()
     End Sub
     Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String))
         Me.location = location
@@ -23,9 +22,8 @@
         Me.priority = priority
         Me.colourmap = colourmap
 
-        Me.spritechars = New CharObj(sprite.Count, sprite(0).Length) {}
+        Me.spritechars = New CharObj(sprite.Count - 1, sprite(0).Length - 1) {}
         Me.occupying = New LocationObj(sprite.Count - 1, sprite(0).Length - 1) {}
-        render()
     End Sub
     Public Overridable Sub move(deltaxy As (Integer, Integer))
         remove()
@@ -50,8 +48,8 @@
         Dim ourZeroX = location.Item1 + deltaxy.Item1
         Dim ourZeroY = location.Item2 + deltaxy.Item2
 
-        For i = 0 To spritechars.GetUpperBound(0) - 1 Step 1 'rowloop
-            For j = 0 To spritechars.GetUpperBound(1) - 1 Step 1 'length loop
+        For i = 0 To spritechars.GetUpperBound(0) Step 1 'rowloop
+            For j = 0 To spritechars.GetUpperBound(1) Step 1 'length loop
                 returnList.Add(locationObjAry(ourZeroX + i, ourZeroY + j))
             Next j
         Next i
@@ -72,36 +70,38 @@
             End If
         Next
 
-        ' For i = 0 To spritechars.GetUpperBound(0) - 1 Step 1 'rowloop
-        '     For j = 0 To spritechars.GetUpperBound(1) - 1 Step 1 'length loop
-        '         locationObjAry(ourZeroX + i, ourZeroY + j).removeChar(Me)
-        '     Next j
-        ' Next i
     End Sub
     Public Sub write() 'adds chars to the locationObj they need to be added to
 
         Dim ourZeroX = location.Item1
         Dim ourZeroY = location.Item2
 
-        For i = 0 To spritechars.GetUpperBound(0) - 1 Step 1 'rowloop
-            For j = 0 To spritechars.GetUpperBound(1) - 1 Step 1 'length loop
-                If spritechars(i, j).CellChar = "Ý"c Then
-                    'do nothing if the char in a slot is &
-                ElseIf spritechars(i, j).CellChar = "ý"c Then
-                    'this reserved for if we want squares to be part of the gameObj but not rendered as a char
-                    locationObjAry(ourZeroX + i, ourZeroY + j).addChar(spritechars(i, j))
-                    occupying(ourZeroX + i, ourZeroY + j) = locationObjAry(ourZeroX + i, ourZeroY + j)
+        Dim spriteHeight = spritechars.GetUpperBound(0)
+        Dim spriteWidth = spritechars.GetUpperBound(1)
+
+
+        For i = 0 To spriteHeight Step 1 'rowloop
+            For j = 0 To spriteWidth Step 1 'length loop
+                If spritechars(i, j).CellChar = "Ý"c Then 'do nothing if the char in a slot is &
+
+                ElseIf spritechars(i, j).CellChar = "ý"c Then 'this reserved for if we want squares to be part of the gameObj but not shown
+
                 Else
+
                     locationObjAry(ourZeroX + i, ourZeroY + j).addChar(spritechars(i, j))
                     occupying(i, j) = locationObjAry(ourZeroX + i, ourZeroY + j)
-                End If
 
+
+                End If
             Next j
         Next i
 
+
+
+
     End Sub
-    Public Sub render()
-        'assumes every line is same length????? needs #of lines + length of longest line to find the 0,0 point
+    Public Sub render() 'takes the sprite and turns it into charobjs
+
         If colourmap.Count > 0 Then
             Dim colourmap2 = colourmap
         Else

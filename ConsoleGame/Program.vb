@@ -14,11 +14,13 @@ Module Program
     Public KeyboardActions As Queue(Of GameEnums.KeyboardActions) = New Queue(Of GameEnums.KeyboardActions)
 
 
-    Dim background As GameObj = New GameObj(1, (0, 0), backgroundsprite)
+
+
 
     'used to update sprites
-    Public gameObjects As List(Of GameObj) = New List(Of GameObj) From {background}
+
     Sub Main(args As String())
+
         'starting a new thread to listen for keyboard inputs
         Dim userinputthread As Threading.Thread = New Threading.Thread(New Threading.ThreadStart(AddressOf keyboardinputs.ReadInput))
         userinputthread.Start()
@@ -33,10 +35,19 @@ Module Program
 
         InitlocationObjAry()
 
+
+        Dim gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
+
+        Dim background As GameObj = New GameObj(1, (0, 0), backgroundsprite)
+        background.render()
+        gameObjects.Add(background)
+
         Dim player = New Crewmate(5, (6, 100), New List(Of String) From {"OO", "OO"})
+        player.render()
         gameObjects.Add(player)
 
         Dim spaceship = New SolidGameObj(3, (5, getSpaceship.Count - 1), getSpaceship)
+        spaceship.render()
         gameObjects.Add(spaceship)
 
         Dim gamerunning = True
@@ -72,7 +83,7 @@ Module Program
             CleanupScreen()
             Threading.Thread.Sleep(1)
             Console.SetCursorPosition(0, 61)
-            Console.WriteLine(player.ToString)
+            Console.WriteLine(player.toString + "                               ")
 
         End While
 
@@ -121,7 +132,7 @@ Module Program
                 If ranNumer = 3 Then
                     builder.Append("*"c)
                 Else
-                    builder.Append(" "c)
+                    builder.Append("Ý"c)
                 End If
             Next
 
@@ -144,13 +155,15 @@ Module Program
         "ÝÝÝÝÝÝ\=-=/>ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
         "ÝÝÝÝÝÝÝ\=/ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ"
         }
-        Return spaceshit8
-        Dim smallspaceship As List(Of String) = New List(Of String) From {
-            "   __       ",
-            "   \ \_____. ",
-            "###[==_____>",
-            "   /_/      "
+
+        Dim spaceshit15 As List(Of String) = New List(Of String) From {
+            "ÝÝÝ__ÝÝÝÝÝÝÝÝ",
+            "ÝÝÝ\ \_____ÝÝ",
+            "###{==_____>Ý",
+            "ÝÝÝ/_/ÝÝÝÝÝÝÝ"
         }
+
+        Return spaceshit15
     End Function
 
 End Module

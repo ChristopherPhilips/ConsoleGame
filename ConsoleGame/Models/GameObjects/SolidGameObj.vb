@@ -5,12 +5,11 @@
     Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String))
         MyBase.New(priority, location, sprite)
         Me.isCollidable = True
-        render()
     End Sub
+
     Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String))
         MyBase.New(priority, location, sprite, colourmap)
         Me.isCollidable = True
-        render()
     End Sub
 
     Public Overloads Sub render()

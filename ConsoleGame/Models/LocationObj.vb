@@ -7,7 +7,7 @@
     Dim emptycharj = New CharObj(New GameObj(-50, (0, 0), New List(Of String) From {" "}))
     Public Sub New(location As (Integer, Integer))
         Me.location = (location.Item1, location.Item2)
-        HighestPriorityChar = emptycharj
+        competingChars.Add(emptycharj)
     End Sub
     Public Sub addChar(newchar As CharObj, Optional priority As Integer = Nothing)
         If priority <> Nothing Then
@@ -30,23 +30,17 @@
             End If
         Next
 
-        HighestPriorityChar = emptycharj
-
         updatetoPrint()
 
     End Sub
     Private Sub updatetoPrint() 'todo: change how to decide who has prio
-        Dim highestprio = HighestPriorityChar.priority
+        Dim highestprio = -10000
         For Each thing In competingChars
             If highestprio < thing.priority Then
                 HighestPriorityChar = thing
                 toPrint = HighestPriorityChar.CellChar
             End If
         Next
-        If competingChars.Count = 0 Then
-            'HighestPriorityChar = " "
-            toPrint = " "
-        End If
     End Sub
 
     Public Function otherObjects(parentGameObj As GameObj) As List(Of CharObj) 'used to find out what is on the square
