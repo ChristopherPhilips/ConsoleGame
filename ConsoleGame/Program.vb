@@ -2,11 +2,11 @@
 Imports Spectre.Console
 Module Program
     Dim gameWidth As Integer = 140
-    Dim gameHeight As Integer = 60
+    Dim gameHeight As Integer = 30
 
 
     '60rows,140column array to be filled with location objects
-    Public locationObjAry(60, 140) As LocationObj 'public so gameobjs can read it
+    Public locationObjAry(gameHeight, gameWidth) As LocationObj 'public so gameobjs can read it
 
     'whats getting printed, gets rewritten every frame
     Dim renderedscreen As List(Of String)
@@ -26,7 +26,6 @@ Module Program
         userinputthread.Start()
         Dim result As GameEnums.KeyboardActions = Nothing 'initializing result for idk
 
-
         'setting window settings
         'Console.SetBufferSize(140, 60) 'todo: remove
         'Console.SetWindowSize(140, 60) 'todo: remove
@@ -35,14 +34,13 @@ Module Program
 
         InitlocationObjAry()
 
-
         Dim gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
 
         Dim background As GameObj = New GameObj(1, (0, 0), backgroundsprite)
         background.render()
         gameObjects.Add(background)
 
-        Dim player = New Crewmate(5, (6, 100), New List(Of String) From {"OO", "OO"})
+        Dim player = New Crewmate(5, (1, 1), New List(Of String) From {"OO", "OO"})
         player.render()
         gameObjects.Add(player)
 
@@ -82,7 +80,7 @@ Module Program
             PrintScreen(renderedscreen, (0, 0))  'writes to screen 
             CleanupScreen()
             Threading.Thread.Sleep(1)
-            Console.SetCursorPosition(0, 61)
+            Console.SetCursorPosition(0, gameHeight + 2)
             Console.WriteLine(player.toString + "                               ")
 
         End While
@@ -90,9 +88,9 @@ Module Program
     End Sub
 
     Sub InitlocationObjAry() 'used to fill the locationObjAry with locationobj
-        'should iterate over the 60 rows
+        'should iterate over the rows
         For i = 0 To gameHeight - 1 Step 1
-            'should iterate over the 140 locationobjs in the row
+            'should put locationobjs in the row
             For j = 0 To gameWidth - 1 Step 1
                 locationObjAry(i, j) = New LocationObj((i, j))
             Next j
@@ -124,10 +122,9 @@ Module Program
 
     Function backgroundsprite() As List(Of String) 'todo:generate the background
         Dim background As List(Of String) = New List(Of String)
-        Dim oneRow As String = "|==========================================================================================================================================|"
-        For i = 0 To 60 - 1 Step 1
+        For i = 0 To gameHeight - 1 Step 1
             Dim builder As New System.Text.StringBuilder
-            For ColIter As Integer = 1 To 140
+            For ColIter As Integer = 1 To gameWidth
                 Dim ranNumer As Integer = Int((5 * Rnd()) + 1)
                 If ranNumer = 3 Then
                     builder.Append("*"c)
@@ -163,7 +160,7 @@ Module Program
             "ÝÝÝ/_/ÝÝÝÝÝÝÝ"
         }
 
-        Return spaceshit15
+        Return spaceshit8
     End Function
 
 End Module
