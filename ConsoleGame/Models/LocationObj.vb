@@ -1,10 +1,10 @@
 ﻿Public Class LocationObj
-    Public Property toPrint As String = "&"
+    Public Property toPrint As String = " "
     Public Property HighestPriorityChar As CharObj
     Private Property competingChars As List(Of CharObj) = New List(Of CharObj) 'todo: make this work lol
     Public Property location As (Integer, Integer)
 
-    Dim emptycharj = New CharObj(New GameObj(-50, (0, 0), New List(Of String) From {""}))
+    Dim emptycharj = New CharObj(New GameObj(-50, (0, 0), New List(Of String) From {" "}))
     Public Sub New(location As (Integer, Integer))
         Me.location = (location.Item1, location.Item2)
         HighestPriorityChar = emptycharj
@@ -43,6 +43,10 @@
                 toPrint = HighestPriorityChar.CellChar
             End If
         Next
+        If competingChars.Count = 0 Then
+            'HighestPriorityChar = " "
+            toPrint = " "
+        End If
     End Sub
 
     Public Function otherObjects(parentGameObj As GameObj) As List(Of CharObj) 'used to find out what is on the square
