@@ -83,7 +83,7 @@ Public Class Window
     End Sub
 
     Private Sub updateGameObjs()
-        For Each gameobject In Me.gameObjects 'updates the sprites (in locationObj) for gameObjects reporting a change
+        For Each gameobject In Me.gameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
             If gameobject.didChange = True Then
                 Me.addGameObj(gameobject)
             End If

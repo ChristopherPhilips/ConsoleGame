@@ -1,5 +1,5 @@
 ﻿Public Class LocationObj
-    Public Property toPrint As String = " "
+    Public Property toPrint As String = "$"
     Public Property HighestPriorityChar As CharObj
     Public Property competingChars As List(Of CharObj) = New List(Of CharObj) 'todo: make this work lol
     Public Property location As (Integer, Integer)
@@ -8,18 +8,14 @@
     Public Sub New(location As (Integer, Integer))
         Me.location = (location.Item1, location.Item2)
 
-        emptycharj.priority = -50
+        emptycharj.priority = 0
         emptycharj.cellChar = " "
         competingChars.Add(emptycharj)
+        updatetoPrint()
     End Sub
-    Public Sub addChar(newchar As CharObj, Optional priority As Integer = Nothing)
-        If priority <> Nothing Then
-            Dim newchar2 = newchar
-            newchar2.priority = -10 'this doesnt carry back right?
-            competingChars.Add(newchar2)
-        Else
-            competingChars.Add(newchar)
-        End If
+    Public Sub addChar(newchar As CharObj, priority As Integer)
+
+        competingChars.Add(newchar)
 
         updatetoPrint()
     End Sub

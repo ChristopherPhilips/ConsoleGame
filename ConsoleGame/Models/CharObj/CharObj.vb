@@ -6,6 +6,7 @@
         Me.CellChar = " "c
     End Sub
     Public Sub New(CellChar As Char, parentGameObj As GameObj)
+        Me.CellChar = CellChar
         Me.parentGameObj = parentGameObj
         Me.priority = parentGameObj.priority
     End Sub

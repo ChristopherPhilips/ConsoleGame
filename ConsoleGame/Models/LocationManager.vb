@@ -13,20 +13,21 @@
         Me.Height = height
         Me.Width = width
 
-        Me.locationObjAry = New LocationObj(height - 1, width - 1) {}
+        initLocationObjAry()
 
-        InitlocationObjAry()
     End Sub
     Public Sub AddCharObj(charobj As CharObj, coordx As Integer, coordy As Integer) 'puts charobjs into locationobjs
         'askInteractionManager()
-        Me.locationObjAry(coordx, coordy).addChar(charobj)
+        Me.locationObjAry(coordx, coordy).addChar(charobj, charobj.priority)
     End Sub
 
     Public Sub RemoveChar(parentGameObj As GameObj, coordx As Integer, coordy As Integer)
         'askInteractionManager()
         Me.locationObjAry(coordx, coordy).removeChar(parentGameObj)
     End Sub
-    Private Sub InitlocationObjAry() 'used to fill the locationObjAry with locationobj
+    Private Sub initLocationObjAry() 'used to fill the locationObjAry with locationobj
+
+        Me.locationObjAry = New LocationObj(Height - 1, Width - 1) {}
 
         'should iterate over the rows
         For i = 0 To Height - 1 Step 1
