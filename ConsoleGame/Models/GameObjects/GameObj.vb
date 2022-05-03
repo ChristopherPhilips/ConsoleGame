@@ -7,12 +7,18 @@
     Public Property spritechars As Array 'populated by render()
     Public Property isCollidable = False
     Public Property occupying As Array 'array of tiles occupied, boolean(x,y)
-    Public Property parentWindow As Window
+
+    Private _parentWindowStore As Window  'very cool get set example, useful for when we dont want the property to get changed outside this class
+    Public ReadOnly Property parentWindow As Window
+        Get
+            Return _parentWindowStore
+        End Get
+    End Property
 
     Public Sub New(priority As Integer, location As (Integer, Integer), parentWindow As Window, sprite As List(Of String))
         Me.location = location
         Me.sprite = sprite
-        Me.parentWindow = parentWindow
+        Me._parentWindowStore = parentWindow
         Me.priority = priority
 
         Me.spritechars = New CharObj(sprite.Count - 1, sprite(0).Length - 1) {}

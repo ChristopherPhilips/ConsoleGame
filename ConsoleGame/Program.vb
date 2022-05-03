@@ -36,8 +36,12 @@ Module Program
         While gamerunning
 
             Dim actionhappened As Boolean = Program.KeyboardActions.TryDequeue(result)
+
+            'todo: look at gameobj and make it so other things cant delete thier parents
+
+
             'runs when a button is pressed
-            If actionhappened Then
+            If actionhappened Then 'todo: actions get passed to window
                 Select Case result
                     Case GameEnums.KeyboardActions.DownArrow
                         player.move((1, 0))
@@ -48,6 +52,8 @@ Module Program
                     Case GameEnums.KeyboardActions.LeftArrow
                         player.move((0, -1))
                 End Select
+            Else
+                'check for standing interactions with interactiveChars
             End If
 
 

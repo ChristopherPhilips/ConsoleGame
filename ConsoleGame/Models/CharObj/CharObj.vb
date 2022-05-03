@@ -2,7 +2,6 @@
     Public Property CellChar As String
     Public Property colour As String
     Public Property priority As Integer
-    Public Property notPassable = False
     Public Property parentGameObj As GameObj 'i believe this just passes a pointer
     Public Sub New()
         Me.CellChar = " "c

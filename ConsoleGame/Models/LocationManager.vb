@@ -18,10 +18,12 @@
         InitlocationObjAry()
     End Sub
     Public Sub AddCharObj(charobj As CharObj, coordx As Integer, coordy As Integer) 'puts charobjs into locationobjs
+        'askInteractionManager()
         Me.locationObjAry(coordx, coordy).addChar(charobj)
     End Sub
 
     Public Sub RemoveChar(parentGameObj As GameObj, coordx As Integer, coordy As Integer)
+        'askInteractionManager()
         Me.locationObjAry(coordx, coordy).removeChar(parentGameObj)
     End Sub
     Private Sub InitlocationObjAry() 'used to fill the locationObjAry with locationobj
