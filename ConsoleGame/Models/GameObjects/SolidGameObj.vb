@@ -2,15 +2,11 @@
     Inherits GameObj
 
 
-    Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String))
-        MyBase.New(priority, location, sprite)
+    Public Sub New(priority As Integer, location As (Integer, Integer), parentWindow As Window, sprite As List(Of String))
+        MyBase.New(priority, location, parentWindow, sprite)
         Me.isCollidable = True
     End Sub
 
-    Public Sub New(priority As Integer, location As (Integer, Integer), sprite As List(Of String), colourmap As List(Of String))
-        MyBase.New(priority, location, sprite, colourmap)
-        Me.isCollidable = True
-    End Sub
 
     Public Overloads Sub render()
 

@@ -1,12 +1,11 @@
-﻿Public Class CharObj
+﻿Public Class CharObj 'on the map, doesnt care what else is in its tile
     Public Property CellChar As String
     Public Property colour As String
     Public Property priority As Integer
     Public Property notPassable = False
     Public Property parentGameObj As GameObj 'i believe this just passes a pointer
-    Public Sub New(parentGameObj As GameObj)
+    Public Sub New()
         Me.CellChar = " "c
-        Me.parentGameObj = parentGameObj
     End Sub
     Public Sub New(CellChar As Char, colour As String, parentGameObj As GameObj)
         If colour.Length > 0 Then

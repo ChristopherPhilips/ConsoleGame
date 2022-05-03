@@ -5,10 +5,6 @@ Module Program
     Dim gameWidth As Integer = 140
     Dim gameHeight As Integer = 30
 
-
-    '60rows,140column array to be filled with location objects
-    Public locationObjAry(gameHeight, gameWidth) As LocationObj 'public so gameobjs can read it
-
     Public KeyboardActions As Queue(Of GameEnums.KeyboardActions) = New Queue(Of GameEnums.KeyboardActions)
 
     Sub Main(args As String())
@@ -25,20 +21,16 @@ Module Program
         Dim gamescreen = New Window(gameWidth, gameHeight)
 
 
-
         Dim gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
 
-        Dim background As GameObj = New GameObj(1, (0, 0), backgroundsprite)
-        background.render()
-        gamescreen.AddObj(background)
 
-        Dim player = New Crewmate(5, (1, 1), New List(Of String) From {"OO", "OO"})
-        player.render()
-        gamescreen.AddObj(player)
 
-        Dim spaceship = New SolidGameObj(3, (5, getSpaceship.Count - 1), getSpaceship)
-        spaceship.render()
-        gamescreen.AddObj(spaceship)
+        Dim background = gamescreen.add(1, (0, 0), backgroundsprite)
+
+        Dim player = gamescreen.add(5, (1, 1), New List(Of String) From {"OO", "OO"})
+
+        Dim spaceship = gamescreen.add(3, (5, getSpaceship8.Count - 1), getSpaceship8)
+
 
         Dim gamerunning = True
         While gamerunning
@@ -56,10 +48,9 @@ Module Program
                     Case GameEnums.KeyboardActions.LeftArrow
                         player.move((0, -1))
                 End Select
-
             End If
 
-            gamescreen.updateGameObj() 'todo: maybe move this into print mehtod?
+
             gamescreen.Print(1, 1)
 
             CleanupScreen()
@@ -67,7 +58,7 @@ Module Program
             Threading.Thread.Sleep(1)
 
             'debug printing, todo:remove
-            Console.SetCursorPosition(0, gameHeight + 2)
+            'Console.SetCursorPosition(0, gameHeight + 2)
             'Console.WriteLine(player.toString + "                               ")
 
         End While
@@ -96,7 +87,7 @@ Module Program
         Return background
     End Function
 
-    Function getSpaceship() As List(Of String)
+    Function getSpaceship8() As List(Of String)
         Dim spaceshit8 As List(Of String) = New List(Of String) From {
         "ÝÝÝÝÝÝÝ/=\ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
         "ÝÝÝÝÝÝ/=-=\>ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
@@ -106,19 +97,39 @@ Module Program
         "ÝÝÝÝ|                              @()",
         "Ý>=O\        /+  +/=--=-=---=\     })Ý",
         "ÝÝÝÝ(}\    /-/-=/>ÝÝÝÝÝÝÝÝÝÝÝÝ\=--=/ÝÝ",
-        "ÝÝÝÝÝ\=-----=/ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
-        "ÝÝÝÝÝÝ\=-=/>ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
-        "ÝÝÝÝÝÝÝ\=/ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ"
+        "ÝÝÝÝÝ\=-----=/                        ",
+        "ÝÝÝÝÝÝ\=-=/>                          ",
+        "       \=/                            "
         }
-
-        Dim spaceshit15 As List(Of String) = New List(Of String) From {
-            "ÝÝÝ__ÝÝÝÝÝÝÝÝ",
-            "ÝÝÝ\ \_____ÝÝ",
-            "###{==_____>Ý",
-            "ÝÝÝ/_/ÝÝÝÝÝÝÝ"
+        'specialCharmap
+        Dim spaceshit8Charmap As List(Of String) = New List(Of String) From {
+        "ÝÝÝÝÝÝÝ   ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝ      ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝ         ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝ              ÝÝÝÝÝÝÝÝÝÝÝÝ      ÝÝ",
+        "Ý                                    Ý",
+        "ÝÝÝÝ                                  ",
+        "Ý                                    Ý",
+        "ÝÝÝÝ              ÝÝÝÝÝÝÝÝÝÝÝÝ      ÝÝ",
+        "ÝÝÝÝÝ         ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝ      ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ",
+        "ÝÝÝÝÝÝÝ   ÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝÝ"
         }
+        'colourmap
 
         Return spaceshit8
     End Function
+    Function getSpaceship15() As List(Of String)
+
+        Dim spaceshit15 As List(Of String) = New List(Of String) From {
+        "ÝÝÝ__ÝÝÝÝÝÝÝÝ",
+        "ÝÝÝ\ \_____ÝÝ",
+        "###{==_____>Ý",
+        "ÝÝÝ/_/ÝÝÝÝÝÝÝ"
+        }
+        Return spaceshit15
+    End Function
+
+
 
 End Module
