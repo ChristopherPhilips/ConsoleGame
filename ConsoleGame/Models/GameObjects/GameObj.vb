@@ -35,7 +35,7 @@
         For i = 0 To sprite.Count - 1 Step 1 'row loop
             For j = 0 To sprite(0).Length - 1 Step 1 'length loop
 
-                spritechars(i, j) = New CharObj(sprite(i)(j), "", Me)
+                spritechars(i, j) = New CharObj(sprite(i)(j), Me)
 
             Next j
         Next i
