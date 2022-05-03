@@ -3,7 +3,6 @@
     Public Property didChange As Boolean = True
     Public Property location As (Integer, Integer)
     Public Property sprite As List(Of String) 'raw art as list(str)
-    Public Property colourmap As List(Of String) = New List(Of String) From {}
     Public Property spritechars As Array 'populated by render()
     Public Property isCollidable = False
     Public Property occupying As Array 'array of tiles occupied, boolean(x,y)

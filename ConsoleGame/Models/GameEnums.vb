@@ -8,11 +8,4 @@
         SpaceBar
     End Enum
 
-
-    Public Enum Colour
-        Red
-        Blue
-        Black
-    End Enum
-
 End Class
