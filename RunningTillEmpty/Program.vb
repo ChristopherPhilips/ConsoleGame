@@ -1,6 +1,7 @@
 ﻿Imports System
 Imports Spectre.Console
 Imports GameEngine
+Imports System.IO
 Module Program
 
     Dim gameWidth As Integer = 140
@@ -13,9 +14,11 @@ Module Program
 
         'game is built here
 
-        Dim crewmate1 As GameObj = game.createGameObj(MainMenu, 10, (1, 1), "Crewmate_Red.json", GetType(Crewmate_Arrows))
+        Dim pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-        Dim crewmate2 As GameObj = game.createGameObj(MainMenu, 10, (5, 5), "Crewmate_Blue.json", GetType(Crewmate_WASD))
+        Dim crewmate1 As GameObj = game.createGameObj(MainMenu, 10, (1, 1), Path.Combine(pathToJsons, "Crewmate_Red.json"), GetType(Crewmate_Arrows))
+
+        Dim crewmate2 As GameObj = game.createGameObj(MainMenu, 10, (5, 5), Path.Combine(pathToJsons, "Crewmate_Blue.json"), GetType(Crewmate_WASD))
 
         game.addGameObj(MainMenu, crewmate1)
         game.addGameObj(MainMenu, crewmate2)

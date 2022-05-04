@@ -7,6 +7,24 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <None Remove="Assets\Sprites\CrewMate_Blue.json" />
+	  <None Remove="Assets\Sprites\CrewMate_Red.json" />
+	  <None Remove="Assets\Sprites\SmallAsteroid.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Assets\Sprites\CrewMate_Blue.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\Sprites\CrewMate_Red.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\Sprites\SmallAsteroid.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	</ItemGroup>
+
+	<ItemGroup>
 		<PackageReference Include="Spectre.Console" Version="0.44.0" />
 	</ItemGroup>
 
