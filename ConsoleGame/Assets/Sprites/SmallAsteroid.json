@@ -1,0 +1,9 @@
+{
+  "idle": {
+    "charmap": [ "==0==" ],
+    "colourmap": [ "RRWBB" ],
+    "backgroundmap": [ "GGGGG" ],
+    "typemap": [ "SSDSS" ]
+  }
+
+}

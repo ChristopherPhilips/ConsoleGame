@@ -1,9 +1,8 @@
 ﻿Public Class LocationObj
     Public Property toPrint As String = "$"
     Public Property HighestPriorityChar As CharObj
-    Public Property competingChars As List(Of CharObj) = New List(Of CharObj) 'todo: make this work lol
+    Public Property competingChars As List(Of CharObj) = New List(Of CharObj)
     Public Property location As (Integer, Integer)
-
     Private Property emptycharj = New CharObj()
     Public Sub New(location As (Integer, Integer))
         Me.location = (location.Item1, location.Item2)
@@ -18,6 +17,10 @@
         competingChars.Add(newchar)
 
         updatetoPrint()
+    End Sub
+
+    Private Sub getTypes() 'todo:
+        'return list of types we have
     End Sub
 
     Public Sub removeChar(parentGameObj As GameObj)

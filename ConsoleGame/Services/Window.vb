@@ -6,13 +6,14 @@ Public Class Window
     Private Property screenWidth As Integer
     Private Property gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
     Private Property locationManager As LocationManager
+    Private Property interactionManager As InteractionManager
 
     Public Sub New(width As Integer, height As Integer)
         Me.screenWidth = width
         Me.screenHeight = height
-        Dim vbMsgBoxHasdelp(5, 5) As LocationObj
 
         Me.locationManager = New LocationManager(height, width)
+        Me.interactionManager = New InteractionManager(locationManager)
 
     End Sub
 
@@ -33,8 +34,8 @@ Public Class Window
         gameobject.didChange = True
 
     End Sub
-    Public Function add(priority As Integer, location As (Integer, Integer), sprite As List(Of String)) As GameObj
-        Dim newGameObject As GameObj = New GameObj(priority, location, Me, sprite)
+    Public Function add(priority As Integer, location As (Integer, Integer), spriteFile As String) As GameObj
+        Dim newGameObject As GameObj = New GameObj(priority, location, Me, spriteFile)
         gameObjects.Add(newGameObject)
         Return newGameObject
     End Function
@@ -54,13 +55,13 @@ Public Class Window
         Dim ourZeroX = gameobject.location.Item1
         Dim ourZeroY = gameobject.location.Item2
 
-        Dim spriteHeight = gameobject.spritechars.GetUpperBound(0)
-        Dim spriteWidth = gameobject.spritechars.GetUpperBound(1)
+        Dim spriteHeight = gameobject.Height
+        Dim spriteWidth = gameobject.Width
 
         For i = 0 To spriteHeight Step 1 'rowloop
             For j = 0 To spriteWidth Step 1 'length loop
 
-                Me.locationManager.AddCharObj(gameobject.spritechars(i, j), ourZeroX + i, ourZeroY + j)
+                Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                 gameobject.occupying(i, j) = True
 
             Next j
@@ -75,6 +76,7 @@ Public Class Window
         For i = 0 To gameobj.occupying.GetUpperBound(0) Step 1
             For j = 0 To gameobj.occupying.GetUpperBound(1) Step 1
                 If gameobj.occupying(i, j) Then
+                    'interactionmanaer.checkRemove(gameobj, list(of charobjtypes) in the locationobj the gameobj wants to leave)
                     Me.locationManager.RemoveChar(gameobj, objZeroX + i, objZeroY + j)
                 End If
             Next j
@@ -85,7 +87,10 @@ Public Class Window
     Private Sub updateGameObjs()
         For Each gameobject In Me.gameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
             If gameobject.didChange = True Then
+                'interactionmanager check for add interactions
                 Me.addGameObj(gameobject)
+            Else
+                'interactionmanager check for standing
             End If
         Next
     End Sub

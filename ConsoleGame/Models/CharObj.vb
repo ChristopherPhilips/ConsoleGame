@@ -2,9 +2,12 @@
     Public Property CellChar As String
     Public Property priority As Integer
     Public Property parentGameObj As GameObj 'i believe this just passes a pointer
+    Public Property CharObjType As GameEnums.CharObjTypes
+
     Public Sub New()
         Me.CellChar = " "c
     End Sub
+
     Public Sub New(CellChar As Char, parentGameObj As GameObj)
         Me.CellChar = CellChar
         Me.parentGameObj = parentGameObj
