@@ -1,4 +1,4 @@
-﻿Interface ICharObjManager
+﻿Public Interface ICharObjManager
 
     Sub onEnter()
 

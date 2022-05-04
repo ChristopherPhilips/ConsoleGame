@@ -109,6 +109,7 @@ Public Class Sprite 'takes care of putting CharObjs together
 
                     Else
                         Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj)
+                        Me.charObjArray(i, j).CharObjType = [Enum].Parse(GetType(GameEnums.CharObjTypes), Me.typeMap(i)(j))
                     End If
 
                 Else

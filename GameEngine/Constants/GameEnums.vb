@@ -17,7 +17,7 @@
         N 'has no interactions
         S 'solidcharobj
 
-
+        C 'chair
     End Enum
 
 End Class

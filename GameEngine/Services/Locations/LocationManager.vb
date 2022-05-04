@@ -5,9 +5,6 @@
     Private Width As Integer
 
 
-    'Me.RemoveGameObj(gameobject)
-
-
 
     Public Sub New(height As Integer, width As Integer)
         Me.Height = height
@@ -17,12 +14,10 @@
 
     End Sub
     Public Sub AddCharObj(charobj As CharObj, coordx As Integer, coordy As Integer) 'puts charobjs into locationobjs
-        'askInteractionManager()
         Me.locationObjAry(coordx, coordy).addChar(charobj, charobj.priority)
     End Sub
 
     Public Sub RemoveChar(parentGameObj As GameObj, coordx As Integer, coordy As Integer)
-        'askInteractionManager()
         Me.locationObjAry(coordx, coordy).removeChar(parentGameObj)
     End Sub
     Private Sub initLocationObjAry() 'used to fill the locationObjAry with locationobj

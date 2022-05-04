@@ -22,8 +22,6 @@ Public Class Window
         'remove gameobject
         Me.RemoveGameObj(gameobject)
 
-        'InteractionManager check if can move
-
         'move the gameoject
         Dim oldx = gameobject.location.Item1
         Dim newx = oldx + deltaxy.Item1
@@ -72,7 +70,6 @@ Public Class Window
 
             Next j
         Next i
-        gameobject.didChange = False
     End Sub
     Public Sub RemoveGameObj(gameobj As GameObj) 'removes charobjs from locationobjs
 
@@ -93,8 +90,21 @@ Public Class Window
     Private Sub updateGameObjs()
         For Each gameobject In Me.gameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
             If gameobject.didChange = True Then
+                If gameobject.proposedMovement.Item1 <> 0 Or gameobject.proposedMovement.Item2 <> 0 Then 'only check move if it actually wants a move
+                    'InteractionManager check if can move with ProposedMovement
+
+
+                    'if valid movement, window.move, reset proposedmove
+                    Me.move(gameobject, gameobject.proposedMovement)
+                    gameobject.proposedMovement = (0, 0)
+                End If
+
+
+
                 'interactionmanager check for add interactions
+
                 Me.addGameObj(gameobject)
+                gameobject.didChange = False
             Else
                 'interactionmanager check for standing
             End If
@@ -102,20 +112,13 @@ Public Class Window
     End Sub
 
     Public Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions)
-        'todo: give actionablegameobjs the action
+        'gives charobjs that want keyboard commands thier commands
         For Each gameobject In gameObjects
 
-            If TypeOf gameobject Is ActionableGameObj then
+            If TypeOf gameobject Is ActionableGameObj Then
 
-                'W
-                ' H
-                '  A  Why does it let me do it only if i specify it as an ActionableGameObj? how does it know then if it didnt know before????
-                '   T
-
-                Dim actionable As ActionableGameObj = DirectCast(gameobject, GameObj)
+                Dim actionable As ActionableGameObj = gameobject
                 actionable.KeyboardAction(keyboardaction)
-
-                ' gameobject.KeyboardAction(keyboardaction)
 
             End If
         Next

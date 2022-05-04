@@ -16,17 +16,19 @@ Module Program
 
         Dim pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-        Dim crewmate1 As GameObj = game.createGameObj(MainMenu, 10, (1, 1), Path.Combine(pathToJsons, "Crewmate_Red.json"), GetType(Crewmate_Arrows))
+        Dim crewmate1 As GameObj = New Crewmate_Arrows(10, (1, 1), Path.Combine(pathToJsons, "Crewmate_Red.json"))
 
-        Dim crewmate2 As GameObj = game.createGameObj(MainMenu, 10, (5, 5), Path.Combine(pathToJsons, "Crewmate_Blue.json"), GetType(Crewmate_WASD))
+        '  Dim crewmate2 As GameObj = game.createGameObj(MainMenu, 10, (5, 5), Path.Combine(pathToJsons, "Crewmate_Blue.json"), GetType(Crewmate_WASD))
+
 
         game.addGameObj(MainMenu, crewmate1)
-        game.addGameObj(MainMenu, crewmate2)
+        '  game.addGameObj(MainMenu, crewmate2)
+
+
 
         game.SetWindowLocation(MainMenu, 1, 1)
 
         game.setActive(MainMenu)
-
 
 
 

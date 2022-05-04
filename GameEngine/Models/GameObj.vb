@@ -11,20 +11,14 @@
     Public Property Height As Integer 'todo: get rid of this, take size from spriteMap
     Public Property Width As Integer
 
+
     Public Property occupying As Array 'array of tiles occupied, boolean(x,y)
+    Public Property proposedMovement As (Integer, Integer) 'deltaXY
 
 
-    Private _parentWindowStore As Window  'very cool get set example, useful for when we dont want the property to get changed outside this class
-    Public ReadOnly Property parentWindow As Window
-        Get
-            Return _parentWindowStore
-        End Get
-    End Property
-
-    Public Sub New(priority As Integer, location As (Integer, Integer), parentWindow As Window, spriteFile As String)
+    Public Sub New(priority As Integer, location As (Integer, Integer), spriteFile As String)
         Me.priority = priority
         Me.location = location
-        Me._parentWindowStore = parentWindow
 
         Me.sprite = New Sprite(spriteFile, Me)
         Me.spriteMap = sprite.getSprite()
@@ -37,7 +31,8 @@
     End Sub
 
     Public Sub move(deltaxy As (Integer, Integer)) 'have manager do this?
-        parentWindow.move(Me, deltaxy)
+        Me.didChange = True
+        Me.proposedMovement = deltaxy
     End Sub
 
     Public Sub upDateSprite() 'function spot for telling the sprite to update (animations??)
