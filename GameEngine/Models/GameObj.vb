@@ -26,22 +26,23 @@
         Me.location = location
         Me._parentWindowStore = parentWindow
 
-        Me.sprite = New Sprite(spriteFile)
+        Me.sprite = New Sprite(spriteFile, Me)
         Me.spriteMap = sprite.getSprite()
 
         Me.Height = sprite.Height
         Me.Width = sprite.Width
 
-        Me.occupying = New Boolean(sprite.Height - 1, sprite.Width - 1) {}
+        Me.occupying = New Boolean(Height, Width) {}
 
-        render()
     End Sub
 
     Public Sub move(deltaxy As (Integer, Integer)) 'have manager do this?
         parentWindow.move(Me, deltaxy)
     End Sub
 
-    Public Sub render() 'takes the sprite and turns it into charobjs 
+    Public Sub upDateSprite() 'function spot for telling the sprite to update (animations??)
+        'change the sprite in some way
+
         'call sprite.get
         sprite.getSprite()
     End Sub

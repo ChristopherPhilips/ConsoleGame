@@ -12,8 +12,6 @@
         S 'solidcharobj
 
 
-
-        D 'Door 
     End Enum
 
 End Class

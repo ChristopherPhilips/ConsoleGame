@@ -1,8 +1,6 @@
-﻿Public Module Constants 'holds 
+﻿Public Module Constants 'holds dictionaries for types (colours come from https://spectreconsole.net/appendix/colors)
 
-    Public Property colourdictionary As Dictionary(Of Char, String) = New Dictionary(Of Char, String) From {
-        {"G"c, "[Green]"},
-        {"g"c, "[Grey]"}
-    }
+    'Public Property Typedictionary As Dictionary(Of Char, TypeOf CharObj) ' enum??
+
 
 End Module

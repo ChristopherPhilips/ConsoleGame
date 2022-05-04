@@ -5,10 +5,10 @@
     Public Property CharObjType As GameEnums.CharObjTypes
 
     Public Sub New()
-        Me.CellChar = " "c
+        Me.CellChar = " "
     End Sub
 
-    Public Sub New(CellChar As Char, parentGameObj As GameObj)
+    Public Sub New(CellChar As String, parentGameObj As GameObj)
         Me.CellChar = CellChar
         Me.parentGameObj = parentGameObj
         Me.priority = parentGameObj.priority
