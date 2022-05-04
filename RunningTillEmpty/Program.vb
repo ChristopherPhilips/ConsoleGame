@@ -9,20 +9,21 @@ Module Program
     Sub Main(args As String())
 
         Dim game As Engine = New Engine
-        Dim MainMenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
+        Dim MainMenu = game.CreateWindow("Main Menu", 10, 10)
 
         'game is built here
 
+        game.SetWindowLocation(MainMenu, 1, 1)
+
+        game.setActive(MainMenu)
 
 
 
-        game.SetWindowLocation(MainMenu, 2, 2)
 
 
 
 
-
-        game.start()
+        game.start() 'this gives control to the gameengine
         'roll credits
     End Sub
 
