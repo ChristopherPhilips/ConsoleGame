@@ -7,6 +7,7 @@ Public Class Window
     Private Property gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
     Private Property locationManager As LocationManager
     Private Property interactionManager As InteractionManager
+    Public Property isActive As Boolean = False
 
     Public Sub New(width As Integer, height As Integer)
         Me.screenWidth = width
@@ -20,6 +21,8 @@ Public Class Window
     Public Sub move(gameobject As GameObj, deltaxy As (Integer, Integer))
         'remove gameobject
         Me.RemoveGameObj(gameobject)
+
+        'InteractionManager check if can move
 
         'move the gameoject
         Dim oldx = gameobject.location.Item1
@@ -55,7 +58,7 @@ Public Class Window
         Dim ourZeroX = gameobject.location.Item1
         Dim ourZeroY = gameobject.location.Item2
 
-        Dim spriteHeight = gameobject.Height
+        Dim spriteHeight = gameobject.Height 'change this to take from spritemap instead
         Dim spriteWidth = gameobject.Width
 
         For i = 0 To spriteHeight Step 1 'rowloop
@@ -95,7 +98,9 @@ Public Class Window
         Next
     End Sub
 
-
+    Public Sub KeyboardAction()
+        'todo: give actionablegameobjs the action
+    End Sub
 
 
 

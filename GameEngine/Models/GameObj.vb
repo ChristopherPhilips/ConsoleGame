@@ -8,11 +8,10 @@
     Public Property spriteMap As CharObj(,) 'populated by sprite.getSprite()
 
 
-    Public Property Height As Integer 'size comes from sprite
+    Public Property Height As Integer 'todo: get rid of this, take size from spriteMap
     Public Property Width As Integer
 
     Public Property occupying As Array 'array of tiles occupied, boolean(x,y)
-
 
 
     Private _parentWindowStore As Window  'very cool get set example, useful for when we dont want the property to get changed outside this class
@@ -38,7 +37,7 @@
         render()
     End Sub
 
-    Public Overridable Sub move(deltaxy As (Integer, Integer)) 'have manager do this?
+    Public Sub move(deltaxy As (Integer, Integer)) 'have manager do this?
         parentWindow.move(Me, deltaxy)
     End Sub
 

@@ -1,47 +1,29 @@
 ﻿Imports System
 Imports Spectre.Console
+Imports GameEngine
 Module Program
 
     Dim gameWidth As Integer = 140
     Dim gameHeight As Integer = 30
 
-    Public KeyboardActions As Queue(Of GameEnums.KeyboardActions) = New Queue(Of GameEnums.KeyboardActions)
-
     Sub Main(args As String())
 
-        'starting a new thread to listen for keyboard inputs
-        Dim userinputthread As Threading.Thread = New Threading.Thread(New Threading.ThreadStart(AddressOf keyboardinputs.ReadInput))
-        userinputthread.Start()
-        Dim result As GameEnums.KeyboardActions = Nothing 'initializing result for idk
+        Dim game As Engine = New Engine
+        Dim MainMenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
 
-        'setting window settings
-        Console.Clear()
-        Console.CursorVisible = False
-
-        Dim gamescreen = New Window(gameWidth, gameHeight)
-
-        Dim gamerunning = True
-        While gamerunning
-
-            Dim actionhappened As Boolean = Program.KeyboardActions.TryDequeue(result)
-
-            'todo: look at gameobj and make it so other things cant delete thier parents
+        'game is built here
 
 
-            'runs when a button is pressed
-            If actionhappened Then 'todo: actions get passed to window
-                'update things according to action
-            End If
 
 
-            gamescreen.Print(1, 1)
+        game.SetWindowLocation(MainMenu, 2, 2)
 
-            CleanupScreen()
 
-            Threading.Thread.Sleep(1)
 
-        End While
 
+
+        game.start()
+        'roll credits
     End Sub
 
     Sub CleanupScreen() 'todo: write in whitespace around the game

@@ -2,7 +2,7 @@
 
     Sub onEnter()
 
-    Sub StayonTile()
+    Sub onStand()
 
     Sub onLeave()
 
