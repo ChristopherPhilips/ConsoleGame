@@ -9,9 +9,16 @@ Module Program
     Sub Main(args As String())
 
         Dim game As Engine = New Engine
-        Dim MainMenu = game.CreateWindow("Main Menu", 10, 10)
+        Dim MainMenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
 
         'game is built here
+
+        Dim crewmate1 As GameObj = game.createGameObj(MainMenu, 10, (1, 1), "Crewmate_Red.json", GetType(Crewmate_Arrows))
+
+        Dim crewmate2 As GameObj = game.createGameObj(MainMenu, 10, (5, 5), "Crewmate_Blue.json", GetType(Crewmate_WASD))
+
+        game.addGameObj(MainMenu, crewmate1)
+        game.addGameObj(MainMenu, crewmate2)
 
         game.SetWindowLocation(MainMenu, 1, 1)
 
@@ -27,9 +34,6 @@ Module Program
         'roll credits
     End Sub
 
-    Sub CleanupScreen() 'todo: write in whitespace around the game
-
-    End Sub
 
     Function backgroundsprite() As List(Of String) 'todo:generate the background
         Dim background As List(Of String) = New List(Of String)
@@ -69,23 +73,5 @@ Module Program
 
         Return spaceshit8
     End Function
-    Function wallwithdoor() As List(Of String)
-
-        Dim charmap = New List(Of String) From {
-            "==0=="
-        }
-        Dim colourmap = New List(Of String) From {
-            "RRWBB"
-        }
-        Dim backgroundmap = New List(Of String) From {
-            "GGGGG"
-        }
-        Dim typemap = New List(Of String) From {
-            "SSDSS"
-        }
-
-    End Function
-
-
 
 End Module

@@ -37,11 +37,11 @@ Public Class Window
         gameobject.didChange = True
 
     End Sub
-    Public Function create(priority As Integer, location As (Integer, Integer), spriteFile As String) As GameObj
-        Dim newGameObject As GameObj = New GameObj(priority, location, Me, spriteFile)
+    Public Sub create(newGameObject As GameObj) 'adds a gameobject to its updatelist
         gameObjects.Add(newGameObject)
-        Return newGameObject
-    End Function
+    End Sub
+
+
     Public Sub Print(topleftx As Integer, toplefty As Integer) 'writes renderedscreen to terminal
         updateGameObjs()
 
@@ -104,16 +104,18 @@ Public Class Window
     Public Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions)
         'todo: give actionablegameobjs the action
         For Each gameobject In gameObjects
-            If TypeOf gameobject Is ActionableGameObj Then
+
+            If TypeOf gameobject Is ActionableGameObj then
 
                 'W
                 ' H
                 '  A  Why does it let me do it only if i specify it as an ActionableGameObj? how does it know then if it didnt know before????
                 '   T
 
+                Dim actionable As ActionableGameObj = DirectCast(gameobject, GameObj)
+                actionable.KeyboardAction(keyboardaction)
 
-                Dim gameobjectthatIknowisactionable As ActionableGameObj = gameobject
-                gameobjectthatIknowisactionable.KeyboardAction(keyboardaction)
+                ' gameobject.KeyboardAction(keyboardaction)
 
             End If
         Next

@@ -47,7 +47,7 @@
 
                 End If
 
-
+                'cleanup screen around displayed windows.
 
             Next
 
@@ -73,9 +73,27 @@
         End If
     End Sub
     'passthrough to create new gameobjects in a specific window
-    Public Sub createGameObj(windowname As String, priority As Integer, location As (Integer, Integer), spriteFile As String)
+    Public Function createGameObj(windowname As String, priority As Integer, location As (Integer, Integer), spriteFile As String, gameobjType As Type) As GameObj
         If Me.windows.ContainsKey(windowname) Then
-            windows(windowname).create(priority, location, spriteFile)
+            'this should create the specified gameobj
+
+            Dim argTypes As Type() = New Type(3) {GetType(Integer), GetType((Integer, Integer)), GetType(Window), GetType(String)} 'shouldnt have to change as long as new obj types dont need special constructors
+
+            Dim constructorInfo As System.Reflection.ConstructorInfo = gameobjType.GetConstructor(argTypes) 'gets constuctor for given arg types
+
+            Dim args As Object() = New Object(3) {priority, location, windows(windowname), spriteFile} 'makes args
+
+            Dim newGameObj = constructorInfo.Invoke(args) 'creates new instance of class with list of args
+
+            Return newGameObj
+
+        Else
+            Throw New ArgumentException("Cannot create a gameobj in a window that doesn't exist.")
+        End If
+    End Function
+    Public Sub addGameObj(windowname As String, newGameObject As GameObj)
+        If Me.windows.ContainsKey(windowname) Then
+            windows(windowname).create(newGameObject)
         Else
             Throw New ArgumentException("Cannot create a gameobj in a window that doesn't exist.")
         End If
