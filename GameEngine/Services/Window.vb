@@ -18,8 +18,7 @@ Public Class Window
 
     End Sub
 
-    Public Sub move(gameobject As GameObj, deltaxy As (Integer, Integer))
-        'remove gameobject
+    Public Sub move(gameobject As GameObj, deltaxy As (Integer, Integer)) 'just for window to use
         Me.RemoveGameObj(gameobject)
 
         'move the gameoject
@@ -29,14 +28,14 @@ Public Class Window
         Dim oldy = gameobject.location.Item2
         Dim newy = oldy + deltaxy.Item2
 
+
         gameobject.location = (newx, newy)
 
-        'set gameobject didchange to true
-        gameobject.didChange = True
-
+        Me.addGameObj(gameobject)
     End Sub
     Public Sub create(newGameObject As GameObj) 'adds a gameobject to its updatelist
         gameObjects.Add(newGameObject)
+        Me.addGameObj(newGameObject)
     End Sub
 
 
@@ -66,6 +65,9 @@ Public Class Window
                 If gameobject.spriteMap(i, j) IsNot Nothing Then
                     Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                     gameobject.occupying(i, j) = True
+
+                    'interactionmanager check for add interactions
+                    ' Me.interactionManager.checkEnter()
                 End If
 
             Next j
@@ -79,7 +81,12 @@ Public Class Window
         For i = 0 To gameobj.occupying.GetUpperBound(0) Step 1
             For j = 0 To gameobj.occupying.GetUpperBound(1) Step 1
                 If gameobj.occupying(i, j) Then
-                    'interactionmanaer.checkRemove(gameobj, list(of charobjtypes) in the locationobj the gameobj wants to leave)
+
+                    'interactionmanaer.checkRemove(gameobj, list(of charobjs) in the locationobj the gameobj wants to leave)
+                    'this need to be in the remove method
+                    '    Me.interactionManager.checkRemove()
+
+
                     Me.locationManager.RemoveChar(gameobj, objZeroX + i, objZeroY + j)
                 End If
             Next j
@@ -89,21 +96,27 @@ Public Class Window
 
     Private Sub updateGameObjs()
         For Each gameobject In Me.gameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
+
+            'this if statement hold all of the possible kinds of checks we need to do for didChange gameobjects
+            'requested movement
+            'animation changes
+            'moving cursor on menus
             If gameobject.didChange = True Then
-                If gameobject.proposedMovement.Item1 <> 0 Or gameobject.proposedMovement.Item2 <> 0 Then 'only check move if it actually wants a move
-                    'InteractionManager check if can move with ProposedMovement
 
 
-                    'if valid movement, window.move, reset proposedmove
-                    Me.move(gameobject, gameobject.proposedMovement)
+                'check if can move with ProposedMovement
+                If gameobject.proposedMovement.Item1 <> 0 Or gameobject.proposedMovement.Item2 <> 0 Then
+
+                    Dim validMove As Boolean = interactionManager.checkMove(gameobject, gameobject.proposedMovement)
+
+                    If validMove Then
+                        Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object and trigger enter/leave interactions
+                    End If
+
                     gameobject.proposedMovement = (0, 0)
                 End If
 
 
-
-                'interactionmanager check for add interactions
-
-                Me.addGameObj(gameobject)
                 gameobject.didChange = False
             Else
                 'interactionmanager check for standing

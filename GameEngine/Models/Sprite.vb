@@ -3,11 +3,12 @@ Public Class Sprite 'takes care of putting CharObjs together
     'properties
     Public Property Height As Integer
     Public Property Width As Integer
+
+    'todo:redo read and render to use array instead of list(string)
     Private Property charMap As List(Of String) = New List(Of String)   'character map, determines size
     Private Property colourMap As List(Of String) = New List(Of String)   'colour map
     Private Property backgroundMap As List(Of String) = New List(Of String)  'background colour map
     Private Property typeMap As List(Of String) = New List(Of String)   'type of charobj map
-    '   Private Property spriteJSON???
     Private Property charObjArray As CharObj(,)   'charObjArray
     Private Property needDefaults As Boolean() = New Boolean(2) {True, True, True} 'stores needed default 0:Colour 1:Background 2:Type
 
@@ -31,7 +32,7 @@ Public Class Sprite 'takes care of putting CharObjs together
     Private Sub initCharObjArray() 'makes initCharObjArray
         Me.charObjArray = New CharObj(Me.Height, Me.Width) {}
     End Sub
-    Private Sub readFile(spriteFileName As String)
+    Private Sub readFile(spriteFileName As String) 'todo: rewrite to use arrays instead of lists(of string)
 
         Dim filereader2 = New System.IO.StreamReader(spriteFileName)
         Dim rawJSON = filereader2.ReadToEnd
@@ -50,22 +51,24 @@ Public Class Sprite 'takes care of putting CharObjs together
         If parsedJson("init")("colourmap") IsNot Nothing Then
             Dim colourMapJOBJECT = parsedJson("init")("colourmap")
             For Each row In colourMapJOBJECT
+
                 Me.colourMap.Add(row)
+
             Next
             Me.needDefaults(0) = False
         Else
             Me.needDefaults(0) = True
         End If
 
-        If parsedJson("init")("backgroundmap") IsNot Nothing Then
-            Dim backgroundMapJOBJECT = parsedJson("init")("backgroundmap")
-            For Each row In backgroundMapJOBJECT
-                Me.backgroundMap.Add(row)
-            Next
-            Me.needDefaults(1) = False
-        Else
-            Me.needDefaults(1) = True
-        End If
+        '   If parsedJson("init")("backgroundmap") IsNot Nothing Then
+        '       Dim backgroundMapJOBJECT = parsedJson("init")("backgroundmap")
+        '       For Each row In backgroundMapJOBJECT
+        '           Me.backgroundMap.Add(row)
+        '       Next
+        '       Me.needDefaults(1) = False
+        '   Else
+        '       Me.needDefaults(1) = True
+        '   End If
 
         If parsedJson("init")("typemap") IsNot Nothing Then
             Dim typeMapJOBJECT = parsedJson("init")("typemap")
@@ -77,19 +80,13 @@ Public Class Sprite 'takes care of putting CharObjs together
             Me.needDefaults(2) = True
         End If
 
-
-
-
-
-
-
-
     End Sub
-    Private Sub render(parentGameObj As GameObj)
+    Private Sub render(parentGameObj As GameObj) 'todo: rewrite to use arrays instead of lists(of string)
 
 
         For i = 0 To Height
             For j = 0 To Width
+
                 Dim character As Char = Me.charMap(i)(j)
                 Dim charBuilder As System.Text.StringBuilder = New System.Text.StringBuilder(character)
 
@@ -109,13 +106,20 @@ Public Class Sprite 'takes care of putting CharObjs together
 
                     Else
                         Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj)
-                        Me.charObjArray(i, j).CharObjType = [Enum].Parse(GetType(GameEnums.CharObjTypes), Me.typeMap(i)(j))
+                        Me.charObjArray(i, j).CharObjType = Me.typeMap(i)(j)
+
+                        If Me.charMap(i)(j) = "¿" Then
+                            Me.charObjArray(i, j).priority = -69
+                        End If
                     End If
 
                 Else
-                    Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj)
-                End If
+                    Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj) 'this gives ¿ in charmap -priority, so it can be in a square but not visible
+                    If Me.charMap(i)(j) = "¿" Then
+                        Me.charObjArray(i, j).priority = -69
+                    End If
 
+                End If
             Next
         Next
     End Sub

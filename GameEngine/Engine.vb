@@ -4,6 +4,8 @@
     Private userinputthread As Threading.Thread = New Threading.Thread(New Threading.ThreadStart(AddressOf InputManager.ReadInput))
     Private result As GameEnums.KeyboardActions = Nothing
 
+    Public Shared Property CharacterManagers As Dictionary(Of Char, ICharObjManager)
+
     'todo:let it have multipleactive windows
     Private Property windows As Dictionary(Of String, Window) = New Dictionary(Of String, Window)
     Private Property windowLocation As Dictionary(Of String, (Integer, Integer)) = New Dictionary(Of String, (Integer, Integer))
@@ -43,7 +45,8 @@
 
                     Dim topleftX = Me.windowLocation(windowname).Item1
                     Dim topleftY = Me.windowLocation(windowname).Item2
-                    windows(windowname).Print(topleftX, topleftY)
+
+                    windows(windowname).Print(topleftX, topleftY) 'updates and prints
 
                 End If
 
@@ -92,8 +95,6 @@
     Public Sub addGameObj(windowname As String, newGameObject As GameObj)
         If Me.windows.ContainsKey(windowname) Then
 
-            '            newGameObject.parentWindow = windows(windowname)
-
             windows(windowname).create(newGameObject)
 
         Else
@@ -109,8 +110,8 @@
         End If
     End Sub
 
-    Public Sub doSomething()
-
+    Public Sub setCharacterManagers(ManagerDict As Dictionary(Of Char, ICharObjManager))
+        Me.CharacterManagers = ManagerDict
     End Sub
 
 

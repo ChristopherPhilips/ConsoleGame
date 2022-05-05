@@ -15,7 +15,7 @@
     End Enum
     Public Enum CharObjTypes
         N 'has no interactions
-        S 'solidcharobj
+        S 'generic solidcharobj
 
         C 'chair
     End Enum

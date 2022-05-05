@@ -30,9 +30,9 @@
 
     End Sub
 
-    Public Sub move(deltaxy As (Integer, Integer)) 'have manager do this?
-        Me.didChange = True
+    Public Sub move(deltaxy As (Integer, Integer)) 'queues a move action, move actions handled at window.updateGameObjects
         Me.proposedMovement = deltaxy
+        Me.didChange = True
     End Sub
 
     Public Sub upDateSprite() 'function spot for telling the sprite to update (animations??)
