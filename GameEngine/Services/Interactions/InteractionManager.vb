@@ -28,11 +28,15 @@
 
     Function checkMove(gameobject As GameObj, deltaxy As (Integer, Integer)) As Boolean
         Dim validMove As Boolean = True
+
+        Dim topleftX = gameobject.location.Item1 + deltaxy.Item1
+        Dim topleftY = gameobject.location.Item2 + deltaxy.Item2
+
         For i = 0 To gameobject.Height
             For j = 0 To gameobject.Width
                 If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
 
-                    Dim charTypesAtLocation = Me.locationManager.getTypes(j, i, gameobject) 'todo: rewrite this string of getTypes methods to not need a parent gameobject
+                    Dim charTypesAtLocation = Me.locationManager.getTypes(topleftX + j, topleftY + i, gameobject) 'todo: rewrite this string of getTypes methods to not need a parent gameobject
 
                     For Each character In charTypesAtLocation
                         If Engine.CharacterManagers.ContainsKey(character) Then

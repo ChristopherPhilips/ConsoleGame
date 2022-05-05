@@ -30,7 +30,7 @@
 
     End Sub
 
-    Public Sub move(deltaxy As (Integer, Integer)) 'queues a move action, move actions handled at window.updateGameObjects
+    Public Sub queueMove(deltaxy As (Integer, Integer)) 'queues a move action, move actions handled at window.updateGameObjects
         Me.proposedMovement = deltaxy
         Me.didChange = True
     End Sub
