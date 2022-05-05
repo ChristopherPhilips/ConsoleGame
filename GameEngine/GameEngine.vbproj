@@ -8,6 +8,9 @@
 		<PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
 		<PackageReference Include="Spectre.Console" Version="0.44.0" />
 	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="Models\Spriting\" />
+	</ItemGroup>
 	
 	
 </Project>

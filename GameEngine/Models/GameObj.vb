@@ -4,7 +4,7 @@
     Public Property location As (Integer, Integer)
 
 
-    Private Property sprite As Sprite
+    Private Property SpriteManager As SpriteManager
     Public Property spriteMap As CharObj(,) 'populated by sprite.getSprite()
 
 
@@ -16,11 +16,11 @@
     Public Property proposedMovement As (Integer, Integer) 'deltaXY
 
 
-    Public Sub New(priority As Integer, location As (Integer, Integer), spriteFile As String)
+    Public Sub New(priority As Integer, location As (Integer, Integer), sprite As SpriteSheet)
         Me.priority = priority
         Me.location = location
 
-        Me.sprite = New Sprite(spriteFile, Me)
+        Me.SpriteManager = New SpriteManager(Me)
         upDateSprite("idle", 0) ' "idle" sprite is the base sprite, frame 0 is first frame (leave it up to gameObj to update the sprite for animations.)
 
 
@@ -33,9 +33,9 @@
 
 
     Public Sub upDateSprite(animationName As String, frameNumber As Integer) 'function spot for getting the sprite and setting information related to the sprite(size mostly) 
-        Me.spriteMap = sprite.getSprite(animationName, frameNumber)
-        Me.Height = sprite.Height
-        Me.Width = sprite.Width
+        Me.spriteMap = SpriteManager.getSprite(animationName, frameNumber)
+        Me.Height = SpriteManager.Height
+        Me.Width = SpriteManager.Width
         Me.occupying = New Boolean(Height, Width) {}
     End Sub
 

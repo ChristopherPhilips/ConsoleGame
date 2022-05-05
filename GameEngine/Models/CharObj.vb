@@ -10,7 +10,7 @@
         Me.CharObjType = CharObjType
     End Sub
 
-    Public Sub New(CellChar As String, parentGameObj As GameObj)
+    Public Sub New(CellChar As String)
         Me.CellChar = CellChar
         Me.parentGameObj = parentGameObj
         Me.priority = parentGameObj.priority

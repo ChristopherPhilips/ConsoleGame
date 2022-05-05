@@ -1,30 +1,47 @@
 {
-  "idle": [
+
+   "idle": [
+      {
+        "charmap": [
+          " X ",
+          "XOX",
+          " X "
+        ],
+        "colourmap": [
+          [ "", "", "" ],
+          [ "", "blue", "" ],
+          [ "", "", "" ]
+        ],
+        "typemap": [
+          " H ",
+          "HCH",
+          " H "
+        ]
+      }
+    ],
+  "animations": 
     {
-      "charmap": [
-        " ¿ ",
-        "¿O¿",
-        " ¿ "
-      ],
-      "colourmap": [
-        [ "", " ", "" ],
-        [ "", "blue", "" ],
-        [ "", "", "" ]
-      ],
-      "backgroundmap": [
-        [ "", "", "" ],
-        [ "", "white", "" ],
-        [ "", "", "" ]
-      ],
-      "typemap": [
-        " H ",
-        "HCH",
-        " H "
+      "idle": [
+        {
+          "charmap": [
+            " X ",
+            "XOX",
+            " X "
+          ],
+          "colourmap": [
+            [ "", "", "" ],
+            [ "", "blue", "" ],
+            [ "", "", "" ]
+          ],
+          "typemap": [
+            " H ",
+            "HCH",
+            " H "
+          ]
+        }
       ]
     }
-  ]
-
-
   
+
 
 }
