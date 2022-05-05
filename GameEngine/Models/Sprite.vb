@@ -1,130 +1,109 @@
 ﻿Imports Newtonsoft.Json.Linq
-Public Class Sprite 'takes care of putting CharObjs together
-    'properties
+Public Class Sprite 'takes care of putting CharObjs together as a group
+    Private Property parentGameObj As GameObj
+
     Public Property Height As Integer
     Public Property Width As Integer
 
-    'todo:redo read and render to use array instead of list(string)
-    Private Property charMap As List(Of String) = New List(Of String)   'character map, determines size
-    Private Property colourMap As List(Of String) = New List(Of String)   'colour map
-    Private Property backgroundMap As List(Of String) = New List(Of String)  'background colour map
-    Private Property typeMap As List(Of String) = New List(Of String)   'type of charobj map
-    Private Property charObjArray As CharObj(,)   'charObjArray
-    Private Property needDefaults As Boolean() = New Boolean(2) {True, True, True} 'stores needed default 0:Colour 1:Background 2:Type
+    'one still image of a gameObj is a compilation of 4 maps, charMap ,colourMap ,backgroundMap, typeMap
+    Private Property spriteSheet As Dictionary(Of String, Array) = New Dictionary(Of String, Array) 'needs to store animation name->list of frames?
 
     Public Sub New(spriteFileName As String, parentGameObj As GameObj) 'reads file, make the charObjArray
-        'turns files into 4 lists
-        readFile(spriteFileName)
+        Me.parentGameObj = parentGameObj
+        'open the file and pull in all the sprites
 
-        'populate height+width from charmap
-        Me.Height = charMap.Count - 1
-        Me.Width = charMap(0).Length - 1
+        'wants json of form string:List(of dictionary(of string, list)
+        '{ 
+        ' animationName1: [                                           sprite only needs "idle":[{charMap:list(of string)}]
+        '                  {
+        '                   charMap : list(of String),                Frame 1
+        '                   colourMap : list(of list(of String),
+        '                   backgroundMap : list(of list(of String),
+        '                   typeMap : list(of String)
+        '                  }, 
+        '                  {                                          Frame 2
+        '                   charMap : list(of String),
+        '                   colourMap : list(of list(of String),
+        '                   backgroundMap : list(of list(of String),
+        '                   typeMap : list(of String)
+        '                  }
+        '                 ],
+        ' animationName2:[
+        '                 {...
+        '}
 
-        'sets size of charObjArray
-        initCharObjArray()
-
-        'creates charobjs and puts into array
-        render(parentGameObj)
+        parseFile(spriteFileName)
 
     End Sub
 
     'methods
-    Private Sub initCharObjArray() 'makes initCharObjArray
-        Me.charObjArray = New CharObj(Me.Height, Me.Width) {}
-    End Sub
-    Private Sub readFile(spriteFileName As String) 'todo: rewrite to use arrays instead of lists(of string)
+    Private Sub parseFile(spriteFileName As String) 'opens + reads file, stores in spriteSheet 
 
         Dim filereader2 = New System.IO.StreamReader(spriteFileName)
         Dim rawJSON = filereader2.ReadToEnd
         Dim parsedJson As JObject = JObject.Parse(rawJSON)
 
-        Dim defaultColours As List(Of String) = New List(Of String)
-        Dim defualtBackground As List(Of String) = New List(Of String)
-        Dim defaultType As List(Of String) = New List(Of String)
+        Dim emptyary As Array = New Boolean() {} 'has length 0, used to indicate needing defaults
+        'todo: this \/|/\
 
-        'turning JObjects into lists of string
-        Dim charMapJOBJECT = parsedJson("init")("charmap")
-        For Each row In charMapJOBJECT
-            Me.charMap.Add(row)
-        Next
-
-        If parsedJson("init")("colourmap") IsNot Nothing Then
-            Dim colourMapJOBJECT = parsedJson("init")("colourmap")
-            For Each row In colourMapJOBJECT
-
-                Me.colourMap.Add(row)
-
-            Next
-            Me.needDefaults(0) = False
-        Else
-            Me.needDefaults(0) = True
-        End If
-
-        '   If parsedJson("init")("backgroundmap") IsNot Nothing Then
-        '       Dim backgroundMapJOBJECT = parsedJson("init")("backgroundmap")
-        '       For Each row In backgroundMapJOBJECT
-        '           Me.backgroundMap.Add(row)
-        '       Next
-        '       Me.needDefaults(1) = False
-        '   Else
-        '       Me.needDefaults(1) = True
-        '   End If
-
-        If parsedJson("init")("typemap") IsNot Nothing Then
-            Dim typeMapJOBJECT = parsedJson("init")("typemap")
-            For Each row In typeMapJOBJECT
-                Me.typeMap.Add(row)
-            Next
-            Me.needDefaults(2) = False
-        Else
-            Me.needDefaults(2) = True
-        End If
+        'store data by animation
+        'animationName -> animation as array (4 elements) {4 arrays of char,colour,background,type}
 
     End Sub
-    Private Sub render(parentGameObj As GameObj) 'todo: rewrite to use arrays instead of lists(of string)
+    Private Function render(frame As Array) As CharObj(,) 'turns 4 arrays into array of charobjs, called when we want the sprite
 
+        'empty maps will be 0 element arrays, otherwise they are sized to charMap's size
+        Dim charMap As Array = frame(0)
+        Dim colourMap As Array = frame(1)
+        Dim backgroundMap As Array = frame(2)
+        Dim typeMap As Array = frame(3)
 
-        For i = 0 To Height
-            For j = 0 To Width
+        'populate height+width from charmap
+        Me.Height = charMap.GetLength(0) - 1
+        Me.Width = charMap.GetLength(1) - 1 'gets column 2 of array 
 
-                Dim character As Char = Me.charMap(i)(j)
+        Dim renderedFrame As CharObj(,) = New CharObj(,) {}
+
+        For i = 0 To Me.Height
+            For j = 0 To Me.Width
+                Dim character As Char = charMap(i)(j) 'given char for the space
+
                 Dim charBuilder As System.Text.StringBuilder = New System.Text.StringBuilder(character)
 
-                If needDefaults(0) = False Then 'colour, default behavior is to do nothing
+
+                If colourMap.Length <> 0 Then 'colour, default behavior is to do nothing
                     charBuilder.Insert(0, $"[{colourMap(i)(j)}]")
                     charBuilder.Append("[/]")
                 End If
-                If needDefaults(1) = False Then 'background, default behavior is to do nothing
+                If backgroundMap.Length <> 0 Then 'background, default behavior is to do nothing
                     charBuilder.Insert(0, $"[{backgroundMap(i)(j)}]")
                     charBuilder.Append("[/]")
                 End If
+                If typeMap.Length <> 0 Then 'type default behavior is to display as just chars, if we're given a type map we will make special charobjs
 
-                If needDefaults(2) = False Then 'type default behavior is to display literal, if we're given a type map we will make special charobjs
+                    renderedFrame(i, j) = New CharObj(charBuilder.ToString, Me.parentGameObj)
+                    renderedFrame(i, j).CharObjType = typeMap(i, j)
 
-                    'this if statement should make different types of char objects
-                    If Me.typeMap(i)(j) = " "c Then ' spaceChar in typemap means object doesnt occupy that space at all
 
-                    Else
-                        Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj)
-                        Me.charObjArray(i, j).CharObjType = Me.typeMap(i)(j)
-
-                        If Me.charMap(i)(j) = "¿" Then
-                            Me.charObjArray(i, j).priority = -69
-                        End If
+                    If charMap(i, j) = "¿" Then 'check to lower prio on Charobjects we dont wanna see
+                        renderedFrame(i, j).priority = -69
                     End If
-
                 Else
-                    Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj) 'this gives ¿ in charmap -priority, so it can be in a square but not visible
-                    If Me.charMap(i)(j) = "¿" Then
-                        Me.charObjArray(i, j).priority = -69
+                    renderedFrame(i, j) = New CharObj(charBuilder.ToString, parentGameObj) 'this gives ¿ in charmap -priority, so it can be in a square but not visible
+                    If renderedFrame(i, j).CharObjType = "¿" Then
+                        renderedFrame(i, j).priority = -69
                     End If
-
                 End If
+
             Next
         Next
-    End Sub
-    'getRenderedSprite{returns charobjarray} 'This is essentially the object as a collection of its parts
-    Public Function getSprite()
+
+        Return renderedFrame
+    End Function
+
+    Public Function getSprite(animationName As String, frameNumber As Integer) 'gameobj will tell us animationName+Frame
+        ' spriteSheet(animationName)(frameNumber)  will give us an array of the 4 maps. empty maps will be 1 element arrays of boolean False
+        Dim charobjArray As CharObj(,) = render(spriteSheet(animationName)(frameNumber))
         Return charObjArray
     End Function
 

@@ -116,6 +116,9 @@ Public Class Window
                     gameobject.proposedMovement = (0, 0)
                 End If
 
+                'If TypeOf gameobject Is hasAnimations Then
+                ' gameobject.doanimation>>>
+                'End If
 
                 gameobject.didChange = False
             Else

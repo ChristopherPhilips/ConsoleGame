@@ -5,7 +5,7 @@
     Public Property CharObjType As Char
 
     Public Sub New(CellChar As String, priority As Integer, CharObjType As Char)
-        Me.CellChar = " "
+        Me.CellChar = CellChar
         Me.priority = priority
         Me.CharObjType = CharObjType
     End Sub

@@ -11,8 +11,8 @@
     Public Property Height As Integer 'todo: get rid of this, take size from spriteMap
     Public Property Width As Integer
 
+    Public Property occupying As Array 'array of tiles occupied, boolean(x,y) (controlled by window.move)
 
-    Public Property occupying As Array 'array of tiles occupied, boolean(x,y)
     Public Property proposedMovement As (Integer, Integer) 'deltaXY
 
 
@@ -21,12 +21,8 @@
         Me.location = location
 
         Me.sprite = New Sprite(spriteFile, Me)
-        Me.spriteMap = sprite.getSprite()
+        upDateSprite("idle", 0) ' "idle" sprite is the base sprite, frame 0 is first frame (leave it up to gameObj to update the sprite for animations.)
 
-        Me.Height = sprite.Height
-        Me.Width = sprite.Width
-
-        Me.occupying = New Boolean(Height, Width) {}
 
     End Sub
 
@@ -35,10 +31,27 @@
         Me.didChange = True
     End Sub
 
-    Public Sub upDateSprite() 'function spot for telling the sprite to update (animations??)
-        'change the sprite in some way
 
-        'call sprite.get
-        sprite.getSprite()
+    Public Sub upDateSprite(animationName As String, frameNumber As Integer) 'function spot for getting the sprite and setting information related to the sprite(size mostly) 
+        Me.spriteMap = sprite.getSprite(animationName, frameNumber)
+        Me.Height = sprite.Height
+        Me.Width = sprite.Width
+        Me.occupying = New Boolean(Height, Width) {}
+    End Sub
+
+    'todo: maybe have these be an interface? so the window only tells objects that care about animations to change their animation
+    Private Property currentAnimation As String 'gets changed by who?
+    Private Property currentFrame As Integer 'gets updated by window, if currentFrame>the last frame number in anim, currentframe = 0
+    Private Sub nextAnimationFrame(animationName As String, frameNumber As Integer)
+
+        'change the sprite in some way (animations?)
+        'call sprite.get with wanted change
+        'if wanted anim = last anim, frame ++
+
+        'change size of gameobj in here to reflect new sprite
+        '        Me.Height = sprite.Height
+        '        Me.Width = sprite.Width
+
+        'sprite.getSprite("idle", frameNumber)
     End Sub
 End Class
