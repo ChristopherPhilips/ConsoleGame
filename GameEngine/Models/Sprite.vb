@@ -2,11 +2,11 @@
 Public Class Sprite 'takes care of putting CharObjs together as a group
     Private Property parentGameObj As GameObj
 
-    Public Property Height As Integer
-    Public Property Width As Integer
+    Public Property Height As Integer 'column 0 is height
+    Public Property Width As Integer 'column 1 is length
 
     'one still image of a gameObj is a compilation of 4 maps, charMap ,colourMap ,backgroundMap, typeMap
-    Private Property spriteSheet As Dictionary(Of String, Array) = New Dictionary(Of String, Array) 'needs to store animation name->list of frames?
+    Private Property spriteSheet As Dictionary(Of String, List(Of Array())) = New Dictionary(Of String, List(Of Array()))  'needs to store animation name->list of frames as 4 long array
 
     Public Sub New(spriteFileName As String, parentGameObj As GameObj) 'reads file, make the charObjArray
         Me.parentGameObj = parentGameObj
@@ -37,26 +37,75 @@ Public Class Sprite 'takes care of putting CharObjs together as a group
     End Sub
 
     'methods
-    Private Sub parseFile(spriteFileName As String) 'opens + reads file, stores in spriteSheet 
+    Private Sub parseFile(spriteFileName As String)
+
+    End Sub
+    Private Sub parseFileWIP(spriteFileName As String) 'opens + reads file, stores in spriteSheet todo:this can be done a better way
 
         Dim filereader2 = New System.IO.StreamReader(spriteFileName)
-        Dim rawJSON = filereader2.ReadToEnd
-        Dim parsedJson As JObject = JObject.Parse(rawJSON)
+        Dim rawJSON As String = filereader2.ReadToEnd
 
+        Dim parsedJson As JObject = JObject.Parse(rawJSON)
         Dim emptyary As Array = New Boolean() {} 'has length 0, used to indicate needing defaults
+
+        For Each animation In parsedJson 'animation is list of frames
+            Console.WriteLine("start AnimationName: " + animation.Key)
+
+            Dim animationsFrames As List(Of Array(,)) = New List(Of Array(,))
+
+            For Each frame In parsedJson(animation.Key) 'frame is dictionary(string,Object)
+                Dim framesMaps As Array() = New Array(3) {emptyary, emptyary, emptyary, emptyary}
+
+                Dim frameHeight As Integer 'charmap will determine size for frame
+                Dim frameWidth As Integer
+
+                For Each map In frame 'map is dictionary(mapName, map) 
+                    If TypeOf map Is Object Then
+                        Dim notEmptyMap As Object = map
+
+
+
+                        Dim mapArray As String(,) 'gets added into the framesMaps
+
+                        If notEmptyMap.name = "charmap" Then
+                            frameHeight = notEmptyMap.first.count
+                            Dim gettingSizeOfmap As Array = notEmptyMap
+                            frameWidth = notEmptyMap.GetLength(1) - 1
+                            mapArray = New String(frameHeight, frameWidth) {}
+
+                        End If
+                        If notEmptyMap.name = "colourmap" Then
+
+                        End If
+                        If notEmptyMap.name = "backgroundmap" Then
+                            Dim hello = 5
+                        End If
+
+                        If notEmptyMap.name = "typemap" Then
+                            Dim hello = 5
+                        End If
+
+                    End If
+                Next
+                'animationsFrames.Add()
+            Next
+
+
+
+            ' Me.spriteSheet.Add(animation.Key, animationsFrames) 'add full animation to dictionary
+        Next
         'todo: this \/|/\
 
-        'store data by animation
         'animationName -> animation as array (4 elements) {4 arrays of char,colour,background,type}
 
     End Sub
     Private Function render(frame As Array) As CharObj(,) 'turns 4 arrays into array of charobjs, called when we want the sprite
 
         'empty maps will be 0 element arrays, otherwise they are sized to charMap's size
-        Dim charMap As Array = frame(0)
-        Dim colourMap As Array = frame(1)
-        Dim backgroundMap As Array = frame(2)
-        Dim typeMap As Array = frame(3)
+        Dim charMap As String(,) = frame(0)
+        Dim colourMap As String(,) = frame(1)
+        Dim backgroundMap As String(,) = frame(2)
+        Dim typeMap As String(,) = frame(3)
 
         'populate height+width from charmap
         Me.Height = charMap.GetLength(0) - 1
@@ -66,17 +115,17 @@ Public Class Sprite 'takes care of putting CharObjs together as a group
 
         For i = 0 To Me.Height
             For j = 0 To Me.Width
-                Dim character As Char = charMap(i)(j) 'given char for the space
+                Dim character As Char = charMap(i, j) 'given char for the space
 
                 Dim charBuilder As System.Text.StringBuilder = New System.Text.StringBuilder(character)
 
 
                 If colourMap.Length <> 0 Then 'colour, default behavior is to do nothing
-                    charBuilder.Insert(0, $"[{colourMap(i)(j)}]")
+                    charBuilder.Insert(0, $"[{colourMap(i, j)}]")
                     charBuilder.Append("[/]")
                 End If
                 If backgroundMap.Length <> 0 Then 'background, default behavior is to do nothing
-                    charBuilder.Insert(0, $"[{backgroundMap(i)(j)}]")
+                    charBuilder.Insert(0, $"[{backgroundMap(i, j)}]")
                     charBuilder.Append("[/]")
                 End If
                 If typeMap.Length <> 0 Then 'type default behavior is to display as just chars, if we're given a type map we will make special charobjs
@@ -114,4 +163,9 @@ Public Class Sprite 'takes care of putting CharObjs together as a group
         'render again
 
     End Function
+End Class
+
+Public Class spriteSheet
+    Public Property spritesheet As Dictionary(Of String, List(Of Array()))
+
 End Class
