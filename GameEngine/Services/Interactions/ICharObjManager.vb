@@ -6,5 +6,6 @@
 
     Sub onLeave()
 
+    Function doIcollide() As List(Of Char)    'who i collide with
 
 End Interface

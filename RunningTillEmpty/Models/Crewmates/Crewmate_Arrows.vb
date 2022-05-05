@@ -9,13 +9,13 @@ Public Class Crewmate_Arrows
     Public Overrides Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions)
         Select Case keyboardaction
             Case GameEnums.KeyboardActions.DownArrow
-                Me.move((1, 0))
+                Me.queueMove((1, 0))
             Case GameEnums.KeyboardActions.UpArrow
-                Me.move((-1, 0))
+                Me.queueMove((-1, 0))
             Case GameEnums.KeyboardActions.RightArrow
-                Me.move((0, 1))
+                Me.queueMove((0, 1))
             Case GameEnums.KeyboardActions.LeftArrow
-                Me.move((0, -1))
+                Me.queueMove((0, -1))
         End Select
     End Sub
 End Class

@@ -28,7 +28,7 @@
         For i = 0 To Height - 1 Step 1
             'should put locationobjs in the row
             For j = 0 To Width - 1 Step 1
-                Me.locationObjAry(i, j) = New LocationObj((i, j))
+                Me.locationObjAry(i, j) = New LocationObj()
             Next j
         Next i
 
@@ -50,4 +50,9 @@
         Return renderedscreen
 
     End Function
+
+    Public Function getTypes(coordx As Integer, coordy As Integer, parentGameObj As GameObj) As List(Of Char)
+        Return locationObjAry(coordx, coordy).getTypes(parentGameObj)
+    End Function
+
 End Class
