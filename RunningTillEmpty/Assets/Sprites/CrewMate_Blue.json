@@ -1,25 +1,26 @@
 {
-  "init": {
-    "charmap": [
-      " ¿ ",
-      "¿O¿",
-      " ¿ "
-    ],
-    "colourmap": [
-      [ " ", " ", " " ],
-      [ " ", "[blue]", " " ],
-      [ " ", " ", " " ]
-    ],
-    "backgroundmap": [
-      [ "", "", "" ],
-      [ "", "[white]", "" ],
-      [ "", "", "" ]
-    ],
-    "typemap": [
-      " H ",
-      "HCH",
-      " H "
-    ]
-  }
+  "spritesheet": {
 
+
+
+    "init": {
+      "charmap": [
+        " OO",
+        "OOO",
+        " O "
+      ],
+      "colourmap": [
+        [ "", "blue", "blue" ],
+        [ "blue", "blue", "blue" ],
+        [ "", "blue", "" ]
+      ],
+      "typemap": [
+        " CC ",
+        "CCC",
+        " C "
+      ]
+    }
+
+
+  }
 }

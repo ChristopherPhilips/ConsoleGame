@@ -1,17 +1,28 @@
 {
-  "init": {
-    "charmap": [
-      "OO",
-      "OO"
-    ],
-    "colourmap": [
-      "99",
-      "99"
-    ],
-    "typemap": [
-      "CC",
-      "CC"
-    ]
-  }
+  "spritesheet": {
 
+    "init": {
+      "charmap": [
+        "OOO",
+        "OOO",
+        "XOO"
+      ],
+      "colourmap": [
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ]
+      ],
+      "backgroundmap": [
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ]
+      ],
+      "typemap": [
+        "CCX",
+        "CCC",
+        "CCC"
+      ]
+    }
+
+  }
 }

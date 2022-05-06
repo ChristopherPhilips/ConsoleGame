@@ -61,7 +61,7 @@ Public Class Window
         For i = 0 To spriteHeight Step 1 'rowloop
             For j = 0 To spriteWidth Step 1 'length loop
 
-                'only add the charobjs that actually exist 'this is where "empty" space in the sprite is handled
+                'only add the charobjs that actually exist 'this is where "empty" space in the spriteMap is handled
                 If gameobject.spriteMap(i, j) IsNot Nothing Then
                     Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                     gameobject.occupying(i, j) = True
@@ -116,6 +116,9 @@ Public Class Window
                     gameobject.proposedMovement = (0, 0)
                 End If
 
+                'If TypeOf gameobject Is hasAnimations Then
+                ' gameobject.doanimation>>>
+                'End If
 
                 gameobject.didChange = False
             Else
@@ -128,9 +131,9 @@ Public Class Window
         'gives charobjs that want keyboard commands thier commands
         For Each gameobject In gameObjects
 
-            If TypeOf gameobject Is ActionableGameObj Then
+            If TypeOf gameobject Is KeyboardActionMethods Then
 
-                Dim actionable As ActionableGameObj = gameobject
+                Dim actionable As KeyboardActionMethods = gameobject
                 actionable.KeyboardAction(keyboardaction)
 
             End If
