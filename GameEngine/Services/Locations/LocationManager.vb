@@ -51,8 +51,8 @@
 
     End Function
 
-    Public Function getTypes(coordx As Integer, coordy As Integer, parentGameObj As GameObj) As List(Of Char)
-        Return locationObjAry(coordx, coordy).getTypes(parentGameObj)
+    Public Function getCharObjs(coordx As Integer, coordy As Integer, parentGameObj As GameObj) As List(Of CharObj)
+        Return locationObjAry(coordx, coordy).getCharObjs(parentGameObj)
     End Function
 
 End Class

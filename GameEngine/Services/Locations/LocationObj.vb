@@ -33,18 +33,17 @@
         Next
     End Sub
 
-    Public Function getTypes(parentGameObj As GameObj) As List(Of Char) 'used to find out what is on the square
-        Dim CharTypes = New List(Of Char)
+    Public Function getCharObjs(parentGameObj As GameObj) As List(Of CharObj) 'used to find out what is on the square
+        Dim CharObjects = New List(Of CharObj)
         For Each obj In competingChars
             If obj.CharObjType = "C"c Then
                 Dim setopplase = "stop"
             End If
             If ReferenceEquals(obj.parentGameObj, parentGameObj) = False Then
-                CharTypes.Add(obj.CharObjType)
+                CharObjects.Add(obj)
             End If
         Next
-        Return CharTypes
+        Return CharObjects
     End Function
-
 
 End Class

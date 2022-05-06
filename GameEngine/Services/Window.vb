@@ -102,22 +102,34 @@ Public Class Window
             'animation changes
             'moving cursor on menus
             If gameobject.didChange = True Then
+                While gameobject.didChange
 
 
-                'check if can move with ProposedMovement
-                If gameobject.proposedMovement.Item1 <> 0 Or gameobject.proposedMovement.Item2 <> 0 Then
 
-                    Dim validMove As Boolean = interactionManager.checkMove(gameobject, gameobject.proposedMovement)
+                    'check if can move with ProposedMovement
+                    If gameobject.proposedMovement.Item1 <> 0 Or gameobject.proposedMovement.Item2 <> 0 Then
 
-                    If validMove Then
-                        Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object and trigger enter/leave interactions
+                        Dim validMove As Boolean = interactionManager.checkMove(gameobject, gameobject.proposedMovement) 'runs all interactions then reports back with it being a valid move or not, it handles changing proposed movement.
+
+                        If validMove Then 'if can move, move it
+                            Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object
+                            gameobject.proposedMovement = (0, 0)
+                            gameobject.didChange = False
+                        Else 'if cant move, need to call standing interaction
+                            gameobject.didChange = False
+                            Me.interactionManager.checkStand()
+                        End If
+
+
+
+
+
+
                     End If
 
-                    gameobject.proposedMovement = (0, 0)
-                End If
 
-
-                gameobject.didChange = False
+                    gameobject.didChange = False
+                End While
             Else
                 'interactionmanager check for standing
             End If
