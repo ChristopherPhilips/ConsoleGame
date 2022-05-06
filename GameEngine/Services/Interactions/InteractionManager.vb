@@ -36,13 +36,14 @@
             For j = 0 To gameobject.Width
                 If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
 
-                    Dim charTypesAtLocation = Me.locationManager.getTypes(topleftX + j, topleftY + i, gameobject) 'todo: rewrite this string of getTypes methods to not need a parent gameobject
+                    Dim charTypesAtLocation = Me.locationManager.getTypes(topleftX + i, topleftY + j, gameobject) 'todo: rewrite this string of getTypes methods to not need a parent gameobject
 
                     For Each character In charTypesAtLocation
-                        If Engine.CharacterManagers.ContainsKey(character) Then
+                        If Engine.CharacterManagers.ContainsKey(character) Then 'if no manager assume no collision
                             Dim manager = Engine.CharacterManagers(character)
-                            If manager.doIcollide().Contains(character) Then
+                            If manager.doIcollide().Contains(gameobject.spriteMap(i, j).CharObjType) Then
                                 validMove = False 'if character in question collide, move is invalid!
+                                Return validMove
                             Else
                                 'if characters in question dont collide, move is valid
                             End If
@@ -58,6 +59,7 @@
                 End If
             Next
         Next
+
         Return validMove
 
     End Function

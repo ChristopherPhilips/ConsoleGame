@@ -3,24 +3,24 @@
 
     "init": {
       "charmap": [
-        " X ",
-        "XOX",
-        " X "
+        "OOO",
+        "OOO",
+        "XOO"
       ],
       "colourmap": [
-        [ "", "", "" ],
-        [ "", "red", "" ],
-        [ "", "", "" ]
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ]
       ],
       "backgroundmap": [
-        [ "", "", "" ],
-        [ "", "on white", "" ],
-        [ "", "", "" ]
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ]
       ],
       "typemap": [
-        " X ",
-        "XCX",
-        " X "
+        "CCX",
+        "CCC",
+        "CCC"
       ]
     }
 

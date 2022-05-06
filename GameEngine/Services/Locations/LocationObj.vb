@@ -37,9 +37,6 @@
     Public Function getTypes(parentGameObj As GameObj) As List(Of Char) 'used to find out what is on the square
         Dim CharTypes = New List(Of Char)
         For Each obj In competingChars
-            If obj.CharObjType = "C"c Then
-                Dim setopplase = "stop"
-            End If
             If ReferenceEquals(obj.parentGameObj, parentGameObj) = False Then
                 CharTypes.Add(obj.CharObjType)
             End If

@@ -61,7 +61,7 @@ Public Class Window
         For i = 0 To spriteHeight Step 1 'rowloop
             For j = 0 To spriteWidth Step 1 'length loop
 
-                'only add the charobjs that actually exist 'this is where "empty" space in the sprite is handled
+                'only add the charobjs that actually exist 'this is where "empty" space in the spriteMap is handled
                 If gameobject.spriteMap(i, j) IsNot Nothing Then
                     Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                     gameobject.occupying(i, j) = True
