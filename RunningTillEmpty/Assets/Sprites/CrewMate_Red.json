@@ -1,17 +1,28 @@
 {
-  "idle": {
-    "charmap": [
-      "OO",
-      "OO"
-    ],
-    "colourmap": [
-      "99",
-      "99"
-    ],
-    "typemap": [
-      "CC",
-      "CC"
-    ]
-  }
+  "spritesheet": {
 
+    "init": {
+      "charmap": [
+        " X ",
+        "XOX",
+        " X "
+      ],
+      "colourmap": [
+        [ "", "", "" ],
+        [ "", "red", "" ],
+        [ "", "", "" ]
+      ],
+      "backgroundmap": [
+        [ "", "", "" ],
+        [ "", "on white", "" ],
+        [ "", "", "" ]
+      ],
+      "typemap": [
+        " X ",
+        "XCX",
+        " X "
+      ]
+    }
+
+  }
 }

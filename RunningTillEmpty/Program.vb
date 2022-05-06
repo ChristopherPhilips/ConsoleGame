@@ -23,11 +23,9 @@ Module Program
 
         Dim pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-        Dim crewsprite = New SpriteSheet(Path.Combine(pathToJsons, "CrewMate_Blue.json"), New List(Of String))
-
-        'Dim crewmatered As GameObj = New Crewmate_WASD(10, (2, 2), Path.Combine(pathToJsons, "Crewmate_Red.json"))
-        Dim crewmateblue As GameObj = New Crewmate_Arrows(10, (2, 5), crewsprite)
-        '  game.addGameObj(MainMenu, crewmatered)
+        Dim crewmatered As GameObj = New Crewmate_WASD(10, (2, 2), Path.Combine(pathToJsons, "Crewmate_Red.json"))
+        Dim crewmateblue As GameObj = New Crewmate_Arrows(10, (2, 5), Path.Combine(pathToJsons, "CrewMate_Blue.json"))
+        game.addGameObj(MainMenu, crewmatered)
         game.addGameObj(MainMenu, crewmateblue)
 
 

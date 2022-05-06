@@ -131,9 +131,9 @@ Public Class Window
         'gives charobjs that want keyboard commands thier commands
         For Each gameobject In gameObjects
 
-            If TypeOf gameobject Is ActionableGameObj Then
+            If TypeOf gameobject Is KeyboardActionMethods Then
 
-                Dim actionable As ActionableGameObj = gameobject
+                Dim actionable As KeyboardActionMethods = gameobject
                 actionable.KeyboardAction(keyboardaction)
 
             End If

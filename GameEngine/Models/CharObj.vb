@@ -4,16 +4,17 @@
     Public Property parentGameObj As GameObj 'i believe this just passes a pointer
     Public Property CharObjType As Char
 
-    Public Sub New(CellChar As String, priority As Integer, CharObjType As Char)
+    Public Sub New(CellChar As String, priority As Integer, CharObjType As Char, parentGameObj As GameObj)
         Me.CellChar = CellChar
         Me.priority = priority
         Me.CharObjType = CharObjType
+        Me.parentGameObj = parentGameObj
     End Sub
 
     Public Sub New(CellChar As String)
         Me.CellChar = CellChar
-        Me.parentGameObj = parentGameObj
-        Me.priority = parentGameObj.priority
+        Me.priority = 0
+        Me.CharObjType = "$"
     End Sub
 
 

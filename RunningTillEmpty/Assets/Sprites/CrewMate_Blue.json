@@ -1,47 +1,26 @@
 {
+  "spritesheet": {
 
-   "idle": [
-      {
-        "charmap": [
-          " X ",
-          "XOX",
-          " X "
-        ],
-        "colourmap": [
-          [ "", "", "" ],
-          [ "", "blue", "" ],
-          [ "", "", "" ]
-        ],
-        "typemap": [
-          " H ",
-          "HCH",
-          " H "
-        ]
-      }
-    ],
-  "animations": 
-    {
-      "idle": [
-        {
-          "charmap": [
-            " X ",
-            "XOX",
-            " X "
-          ],
-          "colourmap": [
-            [ "", "", "" ],
-            [ "", "blue", "" ],
-            [ "", "", "" ]
-          ],
-          "typemap": [
-            " H ",
-            "HCH",
-            " H "
-          ]
-        }
+
+
+    "init": {
+      "charmap": [
+        " OO",
+        "OOO",
+        " O "
+      ],
+      "colourmap": [
+        [ "", "blue", "blue" ],
+        [ "blue", "blue", "blue" ],
+        [ "", "blue", "" ]
+      ],
+      "typemap": [
+        " CC ",
+        "CCC",
+        " C "
       ]
     }
-  
 
 
+  }
 }
