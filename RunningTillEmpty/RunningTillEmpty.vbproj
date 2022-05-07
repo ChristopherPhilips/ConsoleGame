@@ -33,9 +33,18 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <None Update="Assets\Sprites\stickyfloor.json">
+	  <None Update="Assets\Sprites\Play.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
+	  <None Update="Assets\Sprites\Title.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Folder Include="Assets\MainMenu\" />
+	  <Folder Include="Models\CharObjs\" />
+	  <Folder Include="Models\Crewmates\" />
 	</ItemGroup>
 
 </Project>

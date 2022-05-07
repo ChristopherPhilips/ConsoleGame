@@ -1,6 +1,8 @@
 ﻿Imports Newtonsoft.Json
 
 Public Class GameObj
+    Public Property isActive As Boolean = False
+
     Public Property priority As Integer
     Public Property didChange As Boolean = True
     Public Property location As (Integer, Integer)
@@ -13,7 +15,6 @@ Public Class GameObj
     Public Property Width As Integer
 
     Public Property occupying As Array 'array of tiles occupied, boolean(x,y) (controlled by window.move)
-
     Public Property proposedMovement As (Integer, Integer) 'deltaXY
 
 
@@ -25,8 +26,11 @@ Public Class GameObj
 
         'open the file and put everything into animations
 
-        Me.spritesheet = parseFile(spriteFile)
-        updateSprite("init", 0) ' "init" sprite is the base sprite, frame 0 is first frame (leave it up to gameObj to update the sprite for animations.)
+        If spriteFile <> "none" Then 'lets gameobjects set their own sprites/size
+            Me.spritesheet = parseFile(spriteFile)
+            updateSprite("init", 0) ' "init" sprite is the base sprite, frame 0 is first frame (leave it up to gameObj to update the sprite for animations.)
+
+        End If
 
     End Sub
 
@@ -36,7 +40,7 @@ Public Class GameObj
     End Sub
 
 
-    Public Overridable Sub updateSprite(animationName As String, frameNumber As Integer) 'function spot for getting the sprite and setting information related to the sprite(size mostly) 
+    Public Overridable Sub updateSprite(animationName As String, frameNumber As Integer) 'function for getting the sprite and setting information related to the sprite(size mostly) 
         Me.spriteMap = Me.spritesheet.getFrame(animationName, frameNumber, Me)
         Me.Height = spriteMap.GetLength(0) - 1
         Me.Width = spriteMap.GetLength(1) - 1

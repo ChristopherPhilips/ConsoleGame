@@ -7,14 +7,17 @@ Module Program
     Dim gameWidth As Integer = 140
     Dim gameHeight As Integer = 30
 
+    Public Property game As Engine = New Engine
+
     Sub Main(args As String())
 
-        Dim game As Engine = New Engine
-        Dim MainMenu = game.CreateWindow("Main Menu", 40, 20)
+        Dim MainMenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
+        Dim ShipScreen = game.CreateWindow("ShipScreen", gameWidth, gameHeight)
+
+        Dim centerOfgame As Integer = gameWidth / 2
+
 
         Dim objectTypes As Dictionary(Of Char, ICharObjManager) = New Dictionary(Of Char, ICharObjManager) From {
-            {"C"c, New CrewmateManager},
-            {"s"c, New StickyFloorManager}
             }
 
 
@@ -24,17 +27,28 @@ Module Program
 
         Dim pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-        Dim crewmatered As GameObj = New Crewmate_WASD(10, (2, 2), Path.Combine(pathToJsons, "Crewmate_Red.json"))
-        Dim crewmateblue As GameObj = New Crewmate_Arrows(10, (2, 5), Path.Combine(pathToJsons, "CrewMate_Blue.json"))
-        game.addGameObj(MainMenu, crewmatered)
-        game.addGameObj(MainMenu, crewmateblue)
+        Dim MainMenuButtons As List(Of MenuButton) = New List(Of MenuButton)
 
-        Dim stickyfloor1 As GameObj = New GameObj(5, (10, 10), Path.Combine(pathToJsons, "stickyfloor.json"))
-        game.addGameObj(MainMenu, stickyfloor1)
+        Dim title As GameObj = New MenuButton(5, (0, 0), Path.Combine(pathToJsons, "Title.json"), False)
+        MainMenuButtons.Add(title)
+        Dim play As GameObj = New MenuButton(5, (0, 0), Path.Combine(pathToJsons, "Play.json"), True)
+        MainMenuButtons.Add(play)
 
-        game.SetWindowLocation(MainMenu, 1, 1)
+
+        Dim menuY As Integer = centerOfgame - (80 / 2) '80 is width of title
+        Dim menuX As Integer = 1
+        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
+
+
+        game.addGameObj(MainMenu, title)
+
+
+
+
+        game.SetWindowLocation(MainMenu, 1, 1) 'this method needs to center window
 
         game.setActive(MainMenu)
+
 
 
 
@@ -69,11 +83,11 @@ Module Program
         "       /=\                            ",
         "      /=-=\>                          ",
         "     /=-----=\                        ",
-        "    (}/    \-\-=\>            /=--=\  ",
-        " >=O/        \+  +\=-=---=--=/     }) ",
-        "    |                              @()",
-        " >=O\        /+  +/=--=-=---=\     }) ",
-        "    (}\    /-/-=/>            \=--=/  ",
+        "    (}/=---=\=\-=\>            /=--=\  ",
+        " >=O/        \+  +\=-=---=--=/       ) ",
+        "    |              +-=----=-+        ()",
+        " >=O\        /+  +/=--=-=---=\       ) ",
+        "    (}\=---=/=/-=/>            \=--=/  ",
         "     \=-----=/                        ",
         "      \=-=/>                          ",
         "       \=/                            "

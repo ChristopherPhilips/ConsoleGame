@@ -4,11 +4,12 @@ Public Class Window
     Private Property locationObjAry As LocationObj(,) = New LocationObj(2, 2) {}
     Private Property screenHeight As Integer
     Private Property screenWidth As Integer
-    Private Property gameObjects As List(Of GameObj) = New List(Of GameObj) From {}
+    Private Property activeGameObjects As List(Of GameObj) = New List(Of GameObj) From {}
+    Private Property inactiveGameObjects As List(Of GameObj) = New List(Of GameObj) From {}
     Private Property locationManager As LocationManager
     Private Property interactionManager As InteractionManager
     Public Property isActive As Boolean = False
-
+    Public Property setActive As List(Of String) = New List(Of String)
     Public Sub New(width As Integer, height As Integer)
         Me.screenWidth = width
         Me.screenHeight = height
@@ -34,7 +35,8 @@ Public Class Window
         Me.addGameObj(gameobject)
     End Sub
     Public Sub create(newGameObject As GameObj) 'adds a gameobject to its updatelist
-        gameObjects.Add(newGameObject)
+        newGameObject.isActive = True
+        activeGameObjects.Add(newGameObject)
         Me.addGameObj(newGameObject)
     End Sub
 
@@ -92,15 +94,19 @@ Public Class Window
     End Sub
 
     Private Sub updateGameObjs()
-        For Each gameobject In Me.gameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
+        For Each gameobject In Me.activeGameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
 
+            If gameobject.isActive = False Then 'way for gameobjects to turn themselves off
+                activeGameObjects.Remove(gameobject)
+                inactiveGameObjects.Add(gameobject)
+                Continue For
+            End If
             'this if statement hold all of the possible kinds of checks we need to do for didChange gameobjects
             'requested movement
             'animation changes
             'moving cursor on menus
             If gameobject.didChange = True Then
                 While gameobject.didChange
-
 
 
                     'check if can move with ProposedMovement
@@ -131,12 +137,26 @@ Public Class Window
             Else
                 Me.interactionManager.checkStand(gameobject, gameobject.location)
             End If
+
+
+
         Next
+
+
+        For Each gameobject In inactiveGameObjects 'way to toggle which gameobjects recieve updates
+            If gameobject.isActive = True Then
+                Me.RemoveGameObj(gameobject)
+                inactiveGameObjects.Remove(gameobject)
+                activeGameObjects.Add(gameobject)
+            End If
+        Next
+
+
     End Sub
 
     Public Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions)
         'gives charobjs that want keyboard commands thier commands
-        For Each gameobject In gameObjects
+        For Each gameobject In activeGameObjects
 
             If TypeOf gameobject Is KeyboardActionMethods Then
 

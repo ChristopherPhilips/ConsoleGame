@@ -31,29 +31,37 @@
             Dim actionhappened As Boolean = InputManager.KeyboardActions.TryDequeue(result)
 
             'result is the keyboardaction enum
+            If activeWindows.Count = 0 Then
+                Exit While
+            End If
 
-
-            'checks to see which windows need to be printed every frame
-            For Each windowname In windows.Keys
-
-                If Me.windows.ContainsKey(windowname) And windows(windowname).isActive Then 'only prints/updates active windows
-
-
-                    If actionhappened Then 'keyboard actions get passed to active windows
-                        windows(windowname).KeyboardAction(result)
-                    End If
-
-                    Dim topleftX = Me.windowLocation(windowname).Item1
-                    Dim topleftY = Me.windowLocation(windowname).Item2
-
-                    windows(windowname).Print(topleftX, topleftY) 'updates and prints
-
+            For Each window In activeWindows
+                'deactivate the window if its no longer active
+                If window.Value.isActive = False Then
+                    Continue For
                 End If
 
-                'cleanup screen around displayed windows.
 
+                If actionhappened Then 'keyboard actions get passed to active windows
+                    window.Value.KeyboardAction(result)
+                End If
+
+                Dim topleftX = Me.windowLocation(window.Key).Item1
+                Dim topleftY = Me.windowLocation(window.Key).Item2
+
+                window.Value.Print(topleftX, topleftY) 'updates and prints
+
+                For Each inactiveWindow In window.Value.setActive
+                    If windows.ContainsKey(inactiveWindow) Then
+                        Dim newactivewindow = windows(inactiveWindow)
+
+                        inactiveWindows.Remove(inactiveWindow)
+                        activeWindows.Add(inactiveWindow, newactivewindow)
+
+                        newactivewindow.isActive = True
+                    End If
+                Next
             Next
-
             'CleanupScreen()
 
             Threading.Thread.Sleep(1)
@@ -106,7 +114,15 @@
             windows(windowname).isActive = True
             activeWindows.Add(windowname, windows(windowname))
         Else
-            Throw New ArgumentException("Cannot activate n a window that doesn't exist.")
+            Throw New ArgumentException("Cannot activate a window that doesn't exist.")
+        End If
+    End Sub
+    Public Sub setInActive(windowname As String)
+        If Me.windows.ContainsKey(windowname) Then
+            windows(windowname).isActive = False
+            inactiveWindows.Add(windowname, windows(windowname))
+        Else
+            Throw New ArgumentException("Cannot deactivate a window that doesn't exist.")
         End If
     End Sub
 

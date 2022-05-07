@@ -2,7 +2,7 @@
     Public Property toPrint As String = "$"
     Public Property competingChars As List(Of CharObj) = New List(Of CharObj)
     Public Sub New()
-        competingChars.Add(New CharObj("#"))
+        competingChars.Add(New CharObj(" "))
         updatetoPrint()
     End Sub
     Public Sub addChar(newchar As CharObj, priority As Integer)
