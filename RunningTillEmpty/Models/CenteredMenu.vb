@@ -93,6 +93,7 @@ Public Class CenteredMenu 'creates items,
             Case GameEnums.KeyboardActions.SpaceBar
 
                 currentSelected.onSelect()
+                Me.didChange = True
 
         End Select
 

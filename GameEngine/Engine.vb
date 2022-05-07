@@ -55,12 +55,10 @@
                 Next
                 Continue While
             End If
-
+            Dim NewactiveWindows As Dictionary(Of String, Window) = New Dictionary(Of String, Window)
             For Each window In activeWindows
-                'deactivate the window if its no longer active
-                If window.Value.isActive = False Then
-                    Continue For
-                End If
+
+
 
 
                 If actionhappened Then 'keyboard actions get passed to active windows
@@ -80,12 +78,24 @@
                         Dim newactivewindow = windows(inactiveWindow)
 
                         inactiveWindows.Remove(inactiveWindow)
-                        activeWindows.Add(inactiveWindow, newactivewindow)
+                        NewactiveWindows.Add(inactiveWindow, newactivewindow)
 
                         newactivewindow.isActive = True
                     End If
                 Next
+
+                'deactivate the window if its no longer active
+                If window.Value.isActive = False Then
+                    If windows.Contains(window) Then
+                        Me.inactiveWindows.Add(window.Key, window.Value)
+                    End If
+
+                    Continue For
+                End If
+
+                NewactiveWindows.Add(window.Key, window.Value)
             Next
+            Me.activeWindows = NewactiveWindows
             'CleanupScreen()
 
             Threading.Thread.Sleep(1)

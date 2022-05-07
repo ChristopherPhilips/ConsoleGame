@@ -18,6 +18,9 @@
                 Case ConsoleKey.RightArrow
                     KeyboardActions.Enqueue(GameEnums.KeyboardActions.RightArrow)
 
+                Case ConsoleKey.Spacebar
+                    KeyboardActions.Enqueue(GameEnums.KeyboardActions.SpaceBar)
+
                 Case ConsoleKey.W
                     KeyboardActions.Enqueue(GameEnums.KeyboardActions.W)
                 Case ConsoleKey.A
