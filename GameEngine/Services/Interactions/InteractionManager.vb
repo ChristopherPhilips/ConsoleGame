@@ -28,27 +28,38 @@
         End If
     End Sub
 
-    Sub checkStand(charobject As CharObj, coordx As Integer, coordy As Integer)  'called when an object ends a turn in a tiles they were already in
-        Dim MyCharobjType = charobject.CharObjType
-        Dim listofCharObj = Me.locationManager.getCharObjs(coordx, coordy, charobject.parentGameObj)
+    Sub checkStand(gameobject As GameObj, location As (Integer, Integer))  'called when an object ends a turn in a tiles they were already in
 
-        If Engine.CharacterManagers.ContainsKey(MyCharobjType) Then 'manager for the charobj leaving
-            Dim MyManager As ICharObjManager = Engine.CharacterManagers(MyCharobjType)
+        Dim topleftX = gameobject.location.Item1
+        Dim topleftY = gameobject.location.Item2
 
-            For Each charobj In listofCharObj
-                Dim OtherCharobjType = charobject.CharObjType
+        For i = 0 To gameobject.Height 'iterating over i
+            For j = 0 To gameobject.Width
+                If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
 
-                If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
-                    Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
-                    OtherManager.onAttemptedStand(charobject)
+                    Dim charObjsAtCurrentLocation As List(Of CharObj) = Me.locationManager.getCharObjs(topleftX + i, topleftY + j, gameobject)
+                    Dim MyCharobjType = gameobject.spriteMap(i, j).CharObjType
 
+                    For Each charObj In charObjsAtCurrentLocation
+
+                        Dim character As Char = charObj.CharObjType
+                        If Engine.CharacterManagers.ContainsKey(character) Then 'if no manager assume no collision
+
+                            Dim manager = Engine.CharacterManagers(character)
+                            manager.onAttemptedStand(gameobject.spriteMap(i, j))
+
+                        End If
+
+                        If Engine.CharacterManagers.ContainsKey(MyCharobjType) Then 'if no manager assume no collision
+                            Dim myManager = Engine.CharacterManagers(MyCharobjType)
+                            myManager.onStand(charObj)
+                        End If
+
+                    Next
                 End If
-
-                MyManager.onStand(charobj)
-
             Next
+        Next
 
-        End If
     End Sub
 
     Sub checkRemove(LeavingCharObj As CharObj, coordx As Integer, coordy As Integer) 'called when an object leaves a tile

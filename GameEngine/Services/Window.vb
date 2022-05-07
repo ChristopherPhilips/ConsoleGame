@@ -109,26 +109,27 @@ Public Class Window
                         Dim validMove As Boolean = interactionManager.checkMove(gameobject, gameobject.proposedMovement) 'runs all interactions then reports back with it being a valid move or not, it handles changing proposed movement.
 
                         If validMove Then 'if can move, move it
-                            Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object
-
-
-
-                            gameobject.proposedMovement = (0, 0)
                             gameobject.didChange = False
+                            Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object
+                            gameobject.proposedMovement = (0, 0)
 
                         Else 'if cant move, need to call standing interaction
                             gameobject.didChange = False
-                            'Me.interactionManager.checkStand(gameobj)
+                            Me.interactionManager.checkStand(gameobject, gameobject.location)
                         End If
+
+                        'Elseif animation changed
+                    Else
+                        gameobject.didChange = False
                     End If
 
                     'placeholder for animations
 
 
-                    gameobject.didChange = False
+
                 End While
             Else
-                'Me.interactionManager.checkStand(gameobj)
+                Me.interactionManager.checkStand(gameobject, gameobject.location)
             End If
         Next
     End Sub
