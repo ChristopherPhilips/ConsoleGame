@@ -27,20 +27,21 @@ Module Program
 
         Dim pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-        Dim MainMenuButtons As List(Of MenuButton) = New List(Of MenuButton)
+        Dim MainMenuButtons As List(Of MenuObject) = New List(Of MenuObject)
 
-        Dim title As GameObj = New MenuButton(5, (0, 0), Path.Combine(pathToJsons, "Title.json"), False)
+        Dim title As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Title.json"), False)
         MainMenuButtons.Add(title)
-        Dim play As GameObj = New MenuButton(5, (0, 0), Path.Combine(pathToJsons, "Play.json"), True)
+        Dim play As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Play.json"), True)
         MainMenuButtons.Add(play)
-
+        Dim exitGame As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Exit.json"), True)
+        MainMenuButtons.Add(exitGame)
 
         Dim menuY As Integer = centerOfgame - (80 / 2) '80 is width of title
         Dim menuX As Integer = 1
-        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
+        Dim MainMenusMenu As GameObj = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
 
 
-        game.addGameObj(MainMenu, title)
+        game.addGameObj(MainMenu, MainMenusMenu)
 
 
 

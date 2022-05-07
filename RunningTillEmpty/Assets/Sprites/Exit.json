@@ -1,0 +1,50 @@
+{
+  "spritesheet": {
+
+
+
+    "init": {
+      "charmap": [
+        ",___       , ",
+        "{__  \\/ * -+-",
+        "{___ /\\ |  | "
+      ],
+      "colourmap": [
+        [ "white", "white", "white", "white", " ", " ", " ", " ", " ", " ", " ", "white", " " ],
+        [ "white", "white", "white", " ", " ", "white", "white", " ", "white", " ", "white", "white", "white" ],
+        [ "white", "white", "white", "white", " ", "white", "white", " ", "white", " ", " ", "white", " " ]
+      ]
+    },
+
+    "animations": {
+      "NotSelected": [
+        {
+          "charmap": [
+            ",___       , ",
+            "{__  \\/ * -+-",
+            "{___ /\\ |  | "
+          ],
+          "colourmap": [
+            [ "white", "white", "white", "white", " ", " ", " ", " ", " ", " ", " ", "white", " " ],
+            ["white","white","white"," "," ","white","white"," ","white"," ","white","white","white"],
+            ["white","white","white","white"," ","white","white"," ","white"," "," ","white"," "]
+          ]
+        }
+      ],
+      "Selected": [
+        {
+          "charmap": [
+            ",___       , ",
+            "{__  \\/ * -+-",
+            "{___ /\\ |  | "
+          ],
+          "colourmap": [
+            [ "aqua", "aqua", "aqua", "aqua", " ", " ", " ", " ", " ", " ", " ", "aqua", " " ],
+            [ "aqua", "aqua", "aqua", " ", " ", "aqua", "aqua", " ", "aqua", " ", "aqua", "aqua", "aqua" ],
+            [ "aqua", "aqua", "aqua", "aqua", " ", "aqua", "aqua", " ", "aqua", " ", " ", "aqua", " " ]
+          ]
+        }
+      ]
+    }
+  }
+}

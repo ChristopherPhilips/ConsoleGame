@@ -45,6 +45,9 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <None Update="Assets\Sprites\Exit.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
 	  <None Update="Assets\Sprites\Play.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>

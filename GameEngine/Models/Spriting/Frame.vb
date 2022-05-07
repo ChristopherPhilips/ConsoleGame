@@ -18,6 +18,9 @@ Public Class Frame 'renders a group of 4 (or less) maps into an array of char ob
         Me.Height = charmap.Count - 1
         Me.Width = charmap(0).Length - 1 'gets column 2 of array 
 
+        parentGameObj.occupying = New Boolean(Height, Width) {}
+
+
         Me.charObjArray = New CharObj(Me.Height, Me.Width) {}
 
         For i = 0 To Height
@@ -38,12 +41,15 @@ Public Class Frame 'renders a group of 4 (or less) maps into an array of char ob
                 End If
                 If typemap IsNot Nothing Then 'type default behavior is to display as just chars, if we're given a type map we will make special charobjs
                     Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj.priority, parentGameObj, typemap(i)(j))
+                    parentGameObj.occupying(i, j) = True
 
                     If charmap(i)(j) = invisChar Then 'check to lower prio on Charobjects we dont wanna see
                         Me.charObjArray(i, j).priority = -69
                     End If
                 Else
                     Me.charObjArray(i, j) = New CharObj(charBuilder.ToString, parentGameObj.priority, parentGameObj) 'this gives ¿ in charmap -priority, so it can be in a square but not visible
+                    parentGameObj.occupying(i, j) = True
+
                     If Me.charObjArray(i, j).CharObjType = invisChar Then
                         Me.charObjArray(i, j).priority = -69
                     End If

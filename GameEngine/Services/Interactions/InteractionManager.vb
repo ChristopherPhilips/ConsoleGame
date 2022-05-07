@@ -3,7 +3,11 @@
 
     Public Sub New(locationManager As LocationManager)
         Me.locationManager = locationManager
+
+
     End Sub
+
+
 
     Sub checkEnter(EnteringCharObj As CharObj, coordx As Integer, coordy As Integer)  'called when an object enters a tile
         Dim MyCharobjType = EnteringCharObj.CharObjType
@@ -36,8 +40,7 @@
         For i = 0 To gameobject.Height 'iterating over i
             For j = 0 To gameobject.Width
                 If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
-
-                    Dim charObjsAtCurrentLocation As List(Of CharObj) = Me.locationManager.getCharObjs(topleftX + i, topleftY + j, gameobject)
+                    Dim charObjsAtCurrentLocation As List(Of CharObj) = Me.locationManager.getCharObjs(i, j, gameobject)
                     Dim MyCharobjType = gameobject.spriteMap(i, j).CharObjType
 
                     For Each charObj In charObjsAtCurrentLocation

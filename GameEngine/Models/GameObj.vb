@@ -5,6 +5,7 @@ Public Class GameObj
 
     Public Property priority As Integer
     Public Property didChange As Boolean = True
+    Public Property animationChange As Boolean = False
     Public Property location As (Integer, Integer)
 
 
@@ -44,7 +45,6 @@ Public Class GameObj
         Me.spriteMap = Me.spritesheet.getFrame(animationName, frameNumber, Me)
         Me.Height = spriteMap.GetLength(0) - 1
         Me.Width = spriteMap.GetLength(1) - 1
-        Me.occupying = New Boolean(Height, Width) {}
     End Sub
 
 

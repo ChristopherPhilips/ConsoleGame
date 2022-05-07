@@ -10,6 +10,7 @@ Public Class Window
     Private Property interactionManager As InteractionManager
     Public Property isActive As Boolean = False
     Public Property setActive As List(Of String) = New List(Of String)
+
     Public Sub New(width As Integer, height As Integer)
         Me.screenWidth = width
         Me.screenHeight = height
@@ -23,14 +24,21 @@ Public Class Window
         Me.RemoveGameObj(gameobject)
 
         'move the gameoject
+
+
+
         Dim oldx = gameobject.location.Item1
         Dim newx = oldx + deltaxy.Item1
 
         Dim oldy = gameobject.location.Item2
         Dim newy = oldy + deltaxy.Item2
 
-
         gameobject.location = (newx, newy)
+
+
+
+
+
 
         Me.addGameObj(gameobject)
     End Sub
@@ -42,7 +50,6 @@ Public Class Window
 
 
     Public Sub Print(topleftx As Integer, toplefty As Integer) 'writes renderedscreen to terminal
-        updateGameObjs()
 
         Dim screen = Me.locationManager.RenderScreen()
 
@@ -65,11 +72,12 @@ Public Class Window
 
                 'only add the charobjs that actually exist 'this is where "empty" space in the spriteMap is handled
                 If gameobject.spriteMap(i, j) IsNot Nothing Then
-                    Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
+
+                    Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), i, j)
                     gameobject.occupying(i, j) = True
 
                     'interactionmanager check for add interactions
-                    Me.interactionManager.checkEnter(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
+                    Me.interactionManager.checkEnter(gameobject.spriteMap(i, j), i, j)
                 End If
 
             Next j
@@ -84,16 +92,16 @@ Public Class Window
             For j = 0 To gameobj.occupying.GetUpperBound(1) Step 1
                 If gameobj.occupying(i, j) Then
 
-                    Me.locationManager.RemoveChar(gameobj, objZeroX + i, objZeroY + j)
+                    Me.locationManager.RemoveChar(gameobj, i, j)
 
-                    Me.interactionManager.checkRemove(gameobj.spriteMap(i, j), objZeroX + i, objZeroY + j) ' in the locationobj the gameobj wants to leave)
+                    Me.interactionManager.checkRemove(gameobj.spriteMap(i, j), i, j) ' in the locationobj the gameobj wants to leave)
                 End If
             Next j
         Next i
 
     End Sub
 
-    Private Sub updateGameObjs()
+    Public Sub updateGameObjs()
         For Each gameobject In Me.activeGameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
 
             If gameobject.isActive = False Then 'way for gameobjects to turn themselves off
@@ -124,9 +132,15 @@ Public Class Window
                             Me.interactionManager.checkStand(gameobject, gameobject.location)
                         End If
 
+
                         'Elseif animation changed
+                    ElseIf gameobject.animationChange Then
+                        gameobject.didChange = False
+                        Me.move(gameobject, gameobject.proposedMovement)
+                        gameobject.animationChange = False
                     Else
                         gameobject.didChange = False
+
                     End If
 
                     'placeholder for animations
@@ -151,6 +165,10 @@ Public Class Window
             End If
         Next
 
+
+    End Sub
+
+    Public Sub windowSizeReRender()
 
     End Sub
 

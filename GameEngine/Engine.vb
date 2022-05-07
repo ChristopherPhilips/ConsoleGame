@@ -24,15 +24,34 @@
         userinputthread.Start()
     End Sub
     Public Sub start()
+        Dim windowHeight = Console.WindowHeight
+        Dim windowWidth = Console.WindowWidth
 
         Dim gamerunning = True
         While gamerunning
 
             Dim actionhappened As Boolean = InputManager.KeyboardActions.TryDequeue(result)
 
+
             'result is the keyboardaction enum
             If activeWindows.Count = 0 Then
                 Exit While
+            End If
+
+            Dim newwindowHeight = Console.WindowHeight
+            Dim newwindowwidth = Console.WindowWidth
+
+            If newwindowHeight <> windowHeight Or newwindowwidth <> windowWidth Then  'reprints the game if window size changes??
+                windowHeight = newwindowHeight
+                windowWidth = newwindowwidth
+
+                For Each window In activeWindows
+                    Dim topleftX = Me.windowLocation(window.Key).Item1
+                    Dim topleftY = Me.windowLocation(window.Key).Item2
+
+                    window.Value.Print(topleftX, topleftY)
+                Next
+                Continue While
             End If
 
             For Each window In activeWindows
@@ -49,6 +68,9 @@
                 Dim topleftX = Me.windowLocation(window.Key).Item1
                 Dim topleftY = Me.windowLocation(window.Key).Item2
 
+
+                'todo add try catch for window being too small
+                window.Value.updateGameObjs()
                 window.Value.Print(topleftX, topleftY) 'updates and prints
 
                 For Each inactiveWindow In window.Value.setActive
