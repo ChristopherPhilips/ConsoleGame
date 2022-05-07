@@ -168,7 +168,7 @@ Public Class Window
 
         Next
 
-
+        'this loop wont work lol, removing from inside loop
         For Each gameobject In inactiveGameObjects 'way to toggle which gameobjects recieve updates
             If gameobject.isActive = True Then
                 Me.RemoveGameObj(gameobject)
