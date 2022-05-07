@@ -21,13 +21,14 @@ Public Class CenteredMenu 'creates items,
                 myButtons.Add(changingbutton)
             End If
         End If
-        Dim lastButtonPos As Integer = 8
+        Dim lastButtonPos As Integer = 0
         For Each button In Me.myButtons
             For i = 0 To button.Height - 1
                 For j = 0 To button.Width - 1
-                    Me.spriteMap(button.Height + i + lastButtonPos, button.Width + j) = button.spriteMap(i, j)
+                    Me.spriteMap(button.location.Item2 + i + lastButtonPos, button.location.Item1 + j) = button.spriteMap(i, j)
                 Next
             Next
+            'lastButtonPos += button.Height
         Next
     End Sub
     Public Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions) Implements KeyboardActionMethods.KeyboardAction

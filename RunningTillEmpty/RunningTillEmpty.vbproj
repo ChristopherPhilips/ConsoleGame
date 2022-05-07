@@ -7,6 +7,18 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Compile Remove="Assets\MainMenu\**" />
+	  <Compile Remove="Models\CharObjs\**" />
+	  <Compile Remove="Models\Crewmates\**" />
+	  <EmbeddedResource Remove="Assets\MainMenu\**" />
+	  <EmbeddedResource Remove="Models\CharObjs\**" />
+	  <EmbeddedResource Remove="Models\Crewmates\**" />
+	  <None Remove="Assets\MainMenu\**" />
+	  <None Remove="Models\CharObjs\**" />
+	  <None Remove="Models\Crewmates\**" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <None Remove="Assets\Sprites\CrewMate_Blue.json" />
 	  <None Remove="Assets\Sprites\CrewMate_Red.json" />
 	  <None Remove="Assets\Sprites\SmallAsteroid.json" />
@@ -39,12 +51,6 @@
 	  <None Update="Assets\Sprites\Title.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </None>
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Assets\MainMenu\" />
-	  <Folder Include="Models\CharObjs\" />
-	  <Folder Include="Models\Crewmates\" />
 	</ItemGroup>
 
 </Project>
