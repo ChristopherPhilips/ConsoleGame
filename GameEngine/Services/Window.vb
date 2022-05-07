@@ -138,6 +138,18 @@ Public Class Window
                         gameobject.didChange = False
                         Me.move(gameobject, gameobject.proposedMovement)
                         gameobject.animationChange = False
+
+
+                    ElseIf gameobject.setActiveWindows.Count <> 0 Then
+                        For Each window In gameobject.setActiveWindows
+                            Me.setActive.Add(window)
+                        Next
+                        gameobject.setActiveWindows = New List(Of String)
+
+                    ElseIf gameobject.turnWindowOff Then
+                        gameobject.turnWindowOff = False
+                        Me.isActive = False '''''''
+
                     Else
                         gameobject.didChange = False
 

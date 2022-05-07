@@ -2,11 +2,14 @@
 
 Public Class GameObj
     Public Property isActive As Boolean = False
+    Public Property setActiveWindows As List(Of String) = New List(Of String)
+    Public Property turnWindowOff As Boolean = False
 
     Public Property priority As Integer
     Public Property didChange As Boolean = True
     Public Property animationChange As Boolean = False
     Public Property location As (Integer, Integer)
+
 
 
     Public Property spriteMap As CharObj(,) 'populated by sprite.getSprite()

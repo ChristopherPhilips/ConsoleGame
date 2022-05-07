@@ -12,7 +12,7 @@ Module Program
     Sub Main(args As String())
 
         Dim MainMenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
-        Dim ShipScreen = game.CreateWindow("ShipScreen", gameWidth, gameHeight)
+        Dim TravelScreen = game.CreateWindow("ShipScreen", gameWidth, gameHeight)
 
         Dim centerOfgame As Integer = gameWidth / 2
 
@@ -31,8 +31,10 @@ Module Program
 
         Dim title As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Title.json"), False)
         MainMenuButtons.Add(title)
+
         Dim play As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Play.json"), True)
         MainMenuButtons.Add(play)
+
         Dim exitGame As GameObj = New MenuObject(5, (0, 0), Path.Combine(pathToJsons, "Exit.json"), True)
         MainMenuButtons.Add(exitGame)
 

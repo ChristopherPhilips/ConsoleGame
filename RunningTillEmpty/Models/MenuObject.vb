@@ -4,6 +4,8 @@ Public Class MenuObject
 
     Public Property isSelectable As Boolean = False
 
+    Public Property parentMenu As CenteredMenu
+
     Public Sub New(priority As Integer, location As (Integer, Integer), spriteFile As String, selectable As Boolean)
         MyBase.New(priority, location, spriteFile) 'doesnt really use these??(does use spritefile)
         Me.isSelectable = selectable
@@ -19,5 +21,7 @@ Public Class MenuObject
         End If
     End Sub
 
+    Public Overridable Sub onSelect()
+    End Sub
 
 End Class

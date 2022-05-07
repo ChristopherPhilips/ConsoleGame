@@ -5,6 +5,7 @@ Public Class CenteredMenu 'creates items,
 
     Public Property currentSelected As MenuObject
     Public Property myButtons As List(Of MenuObject)
+
     Public Sub New(priority As Integer, location As (Integer, Integer), WidthHeight As (Integer, Integer), buttons As List(Of MenuObject))
         MyBase.New(priority, location, "none")
         Me.Height = WidthHeight.Item2 - 1
@@ -27,11 +28,15 @@ Public Class CenteredMenu 'creates items,
         Dim totalButtonheight As Integer = 1
 
         For i = 0 To Me.myButtons.Count - 1 Step 1
+
             Dim button = Me.myButtons(i)
             If Me.currentSelected Is Nothing And button.isSelectable Then
                 Me.currentSelected = button
                 currentSelected.toggleSelected(True)
             End If
+
+            button.parentMenu = Me
+
             Dim topleftXforButton As Integer = (Me.Width - button.Width) / 2 '(menu full length - button full length)/2
             Dim topleftYforButton As Integer = totalButtonheight '+height of all buttons before
             For rowNUM = 0 To button.Height Step 1
@@ -85,6 +90,9 @@ Public Class CenteredMenu 'creates items,
                     addremoveupdateButtons()
                 End If
 
+            Case GameEnums.KeyboardActions.SpaceBar
+
+                currentSelected.onSelect()
 
         End Select
 

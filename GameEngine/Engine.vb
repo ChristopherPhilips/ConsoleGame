@@ -35,6 +35,8 @@
 
             'result is the keyboardaction enum
             If activeWindows.Count = 0 Then
+                Console.Clear()
+                Console.WriteLine("get lost nerd")
                 Exit While
             End If
 
