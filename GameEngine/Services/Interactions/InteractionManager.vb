@@ -13,11 +13,11 @@
             Dim MyManager As ICharObjManager = Engine.CharacterManagers(MyCharobjType)
 
             For Each charobj In listofCharObj
-                Dim OtherCharobjType = EnteringCharObj.CharObjType
+                Dim OtherCharobjType = charobj.CharObjType
 
                 If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
                     Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
-                    OtherManager.Entering(EnteringCharObj)
+                    OtherManager.EnteringMe(EnteringCharObj)
 
                 End If
 
@@ -74,7 +74,7 @@
 
                 If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
                     Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
-                    OtherManager.Leaving(LeavingCharObj)
+                    OtherManager.LeavingMe(LeavingCharObj)
 
                 End If
 
@@ -105,7 +105,7 @@
                         If Engine.CharacterManagers.ContainsKey(character) Then 'if no manager assume no collision
 
                             Dim manager = Engine.CharacterManagers(character)
-                            If manager.doIcollide().Contains(gameobject.spriteMap(i, j).CharObjType) Then
+                            If manager.doIcollide.Contains(gameobject.spriteMap(i, j).CharObjType) Then
                                 validMove = False 'if character in question collide, move is invalid!
                             End If
 

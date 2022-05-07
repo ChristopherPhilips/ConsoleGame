@@ -13,7 +13,8 @@ Module Program
         Dim MainMenu = game.CreateWindow("Main Menu", 40, 20)
 
         Dim objectTypes As Dictionary(Of Char, ICharObjManager) = New Dictionary(Of Char, ICharObjManager) From {
-            {"C"c, New CrewmateManager}
+            {"C"c, New CrewmateManager},
+            {"s"c, New StickyFloorManager}
             }
 
 
@@ -28,7 +29,8 @@ Module Program
         game.addGameObj(MainMenu, crewmatered)
         game.addGameObj(MainMenu, crewmateblue)
 
-
+        Dim stickyfloor1 As GameObj = New GameObj(5, (10, 10), Path.Combine(pathToJsons, "stickyfloor.json"))
+        game.addGameObj(MainMenu, stickyfloor1)
 
         game.SetWindowLocation(MainMenu, 1, 1)
 

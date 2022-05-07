@@ -5,17 +5,17 @@
 
     "init": {
       "charmap": [
-        " OO",
+        " O ",
         "OOO",
         " O "
       ],
       "colourmap": [
-        [ "", "blue", "blue" ],
+        [ "", "blue", "" ],
         [ "blue", "blue", "blue" ],
         [ "", "blue", "" ]
       ],
       "typemap": [
-        " CC ",
+        " C ",
         "CCC",
         " C "
       ]

@@ -67,7 +67,7 @@ Public Class Window
                     gameobject.occupying(i, j) = True
 
                     'interactionmanager check for add interactions
-                    ' Me.interactionManager.checkEnter()
+                    Me.interactionManager.checkEnter(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                 End If
 
             Next j

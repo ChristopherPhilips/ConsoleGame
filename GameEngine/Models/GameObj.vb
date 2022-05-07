@@ -1,6 +1,6 @@
 ﻿Imports Newtonsoft.Json
 
-Public MustInherit Class GameObj
+Public Class GameObj
     Public Property priority As Integer
     Public Property didChange As Boolean = True
     Public Property location As (Integer, Integer)

@@ -1,0 +1,19 @@
+{
+  "spritesheet": {
+
+
+    "init": {
+      "charmap": [
+        "Q"
+      ],
+      "colourmap": [
+        [ "green" ]
+      ],
+      "typemap": [
+        "s"
+      ]
+    }
+
+
+  }
+}

@@ -32,4 +32,10 @@
 	  <ProjectReference Include="..\GameEngine\GameEngine.vbproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Update="Assets\Sprites\stickyfloor.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </None>
+	</ItemGroup>
+
 </Project>
