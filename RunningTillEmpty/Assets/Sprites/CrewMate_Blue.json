@@ -1,0 +1,26 @@
+{
+  "spritesheet": {
+
+
+
+    "init": {
+      "charmap": [
+        " O ",
+        "OOO",
+        " O "
+      ],
+      "colourmap": [
+        [ "", "blue", "" ],
+        [ "blue", "blue", "blue" ],
+        [ "", "blue", "" ]
+      ],
+      "typemap": [
+        " C ",
+        "CCC",
+        " C "
+      ]
+    }
+
+
+  }
+}

@@ -5,14 +5,19 @@
         LeftArrow
         RightArrow
         DownArrow
+
+        W
+        A
+        S
+        D
+
         SpaceBar
     End Enum
+    Public Enum CharObjTypes
+        N 'has no interactions
+        S 'generic solidcharobj
 
-
-    Public Enum Colour
-        Red
-        Blue
-        Black
+        C 'chair
     End Enum
 
 End Class

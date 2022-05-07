@@ -1,0 +1,31 @@
+{
+  "spritesheet": {
+
+    "init": {
+      "charmap": [
+        "OOO",
+        "OOO",
+        "GOO"
+      ],
+      "colourmap": [
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ],
+        [ "red", "red", "red" ]
+      ],
+      "backgroundmap": [
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ],
+        [ "on white", "on white", "on white" ]
+      ],
+      "typemap": [
+        "CCs",
+        "CCC",
+        "CCC"
+      ]
+    },
+    "animations": {
+      
+    }
+
+  }
+}
