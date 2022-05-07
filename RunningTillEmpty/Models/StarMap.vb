@@ -24,7 +24,13 @@ Public Class StarMap 'creates items,
             If column <> 0 AndAlso spriteMap(row, column - 1) IsNot Nothing Then
                 shouldIPlaceAStar = False
             End If
+            If column <> Width AndAlso spriteMap(row, column + 1) IsNot Nothing Then
+                shouldIPlaceAStar = False
+            End If
             If row <> 0 AndAlso spriteMap(row - 1, column) IsNot Nothing Then
+                shouldIPlaceAStar = False
+            End If
+            If row <> Height AndAlso spriteMap(row + 1, column) IsNot Nothing Then
                 shouldIPlaceAStar = False
             End If
             If column <> 0 Then
@@ -62,7 +68,13 @@ Public Class StarMap 'creates items,
             If column <> 0 AndAlso spriteMap(row, column - 1) IsNot Nothing Then
                 shouldIPlaceAStar = False
             End If
+            If column <> Width AndAlso spriteMap(row, column + 1) IsNot Nothing Then
+                shouldIPlaceAStar = False
+            End If
             If row <> 0 AndAlso spriteMap(row - 1, column) IsNot Nothing Then
+                shouldIPlaceAStar = False
+            End If
+            If row <> Height AndAlso spriteMap(row + 1, column) IsNot Nothing Then
                 shouldIPlaceAStar = False
             End If
             If row <> 0 Then
