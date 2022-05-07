@@ -5,6 +5,7 @@ Public Class GameObj
 
     Public Property priority As Integer
     Public Property didChange As Boolean = True
+    Public Property doIWantToMoveMyself As Boolean = False
     Public Property location As (Integer, Integer)
 
 
@@ -47,6 +48,9 @@ Public Class GameObj
         Me.occupying = New Boolean(Height, Width) {}
     End Sub
 
+    Public Overridable Sub MoveMyself(deltaxy As (Integer, Integer))
+
+    End Sub
 
     Private Function parseFile(spriteFileName As String) As SpriteSheet 'opens + reads file, stores as spritesheet
 

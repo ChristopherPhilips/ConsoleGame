@@ -55,4 +55,10 @@
         Return locationObjAry(coordx, coordy).getCharObjs(parentGameObj)
     End Function
 
+    Friend Function WithinBounds(v1 As Integer, v2 As Integer) As Boolean
+        If v1 < locationObjAry.GetUpperBound(0) And v2 < locationObjAry.GetUpperBound(1) And v1 >= 0 And v2 >= 0 Then
+            Return True
+        End If
+        Return False
+    End Function
 End Class

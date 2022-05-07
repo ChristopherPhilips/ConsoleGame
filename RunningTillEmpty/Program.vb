@@ -41,7 +41,8 @@ Module Program
 
 
         game.addGameObj(MainMenu, title)
-
+        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight))
+        game.addGameObj(MainMenu, starMap)
 
 
 

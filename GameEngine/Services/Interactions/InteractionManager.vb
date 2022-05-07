@@ -94,7 +94,7 @@
 
         For i = 0 To gameobject.Height 'iterating over i
             For j = 0 To gameobject.Width
-                If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
+                If gameobject.occupying(i, j) AndAlso locationManager.WithinBounds(topleftX + i, topleftY + j) Then  'check locationObj for each true in occupying
 
                     Dim charObjsAtNewLocation As List(Of CharObj) = Me.locationManager.getCharObjs(topleftX + i, topleftY + j, gameobject)
                     Dim charObjsAtCurrentLocation As List(Of CharObj) = Me.locationManager.getCharObjs(gameobject.location.Item1 + i, gameobject.location.Item2 + j, gameobject)

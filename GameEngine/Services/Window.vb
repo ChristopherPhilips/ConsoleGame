@@ -22,15 +22,22 @@ Public Class Window
     Public Sub move(gameobject As GameObj, deltaxy As (Integer, Integer)) 'just for window to use
         Me.RemoveGameObj(gameobject)
 
-        'move the gameoject
-        Dim oldx = gameobject.location.Item1
-        Dim newx = oldx + deltaxy.Item1
 
-        Dim oldy = gameobject.location.Item2
-        Dim newy = oldy + deltaxy.Item2
+        If gameobject.doIWantToMoveMyself Then
+            gameobject.MoveMyself(deltaxy)
+        Else
+            'move the gameoject
+            Dim oldx = gameobject.location.Item1
+            Dim newx = oldx + deltaxy.Item1
+
+            Dim oldy = gameobject.location.Item2
+            Dim newy = oldy + deltaxy.Item2
 
 
-        gameobject.location = (newx, newy)
+            gameobject.location = (newx, newy)
+        End If
+
+
 
         Me.addGameObj(gameobject)
     End Sub
@@ -125,6 +132,11 @@ Public Class Window
                         End If
 
                         'Elseif animation changed
+                    ElseIf gameobject.proposedMovement.Item1 = 0 And gameobject.proposedMovement.Item2 = 0 Then
+
+                        gameobject.didChange = False
+                        Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object
+
                     Else
                         gameobject.didChange = False
                     End If
