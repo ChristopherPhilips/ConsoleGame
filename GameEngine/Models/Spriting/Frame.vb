@@ -10,7 +10,7 @@ Public Class Frame 'renders a group of 4 (or less) maps into an array of char ob
     Public Property Height
     Public Property Width
     Private ReadOnly Property nullChar As Char = " "c 'char in charmap that indicated gameobj DOES NOT occupy that tile
-    Private ReadOnly Property invisChar As Char = "X"c 'Strings.ChrW(191) 'char in charmap that indicated gameobj DOES occupy that tile, but shouldn't be seen	
+    Private ReadOnly Property invisChar As Char = "G"c 'Strings.ChrW(191) 'char in charmap that indicated gameobj DOES occupy that tile, but shouldn't be seen	
 
     Public Function render(parentGameObj As GameObj) As CharObj(,) 'turns 4 arrays into array of charobjs, called when we want the sprite
 

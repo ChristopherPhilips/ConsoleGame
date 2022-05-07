@@ -36,7 +36,7 @@ Public MustInherit Class GameObj
     End Sub
 
 
-    Public Sub updateSprite(animationName As String, frameNumber As Integer) 'function spot for getting the sprite and setting information related to the sprite(size mostly) 
+    Public Overridable Sub updateSprite(animationName As String, frameNumber As Integer) 'function spot for getting the sprite and setting information related to the sprite(size mostly) 
         Me.spriteMap = Me.spritesheet.getFrame(animationName, frameNumber, Me)
         Me.Height = spriteMap.GetLength(0) - 1
         Me.Width = spriteMap.GetLength(1) - 1

@@ -5,7 +5,7 @@
       "charmap": [
         "OOO",
         "OOO",
-        "XOO"
+        "GOO"
       ],
       "colourmap": [
         [ "red", "red", "red" ],
@@ -22,6 +22,9 @@
         "CCC",
         "CCC"
       ]
+    },
+    "animations": {
+      
     }
 
   }

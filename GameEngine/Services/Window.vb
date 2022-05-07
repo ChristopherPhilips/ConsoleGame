@@ -82,12 +82,9 @@ Public Class Window
             For j = 0 To gameobj.occupying.GetUpperBound(1) Step 1
                 If gameobj.occupying(i, j) Then
 
-                    'interactionmanaer.checkRemove(gameobj, list(of charobjs) in the locationobj the gameobj wants to leave)
-                    'this need to be in the remove method
-                    '    Me.interactionManager.checkRemove()
-
-
                     Me.locationManager.RemoveChar(gameobj, objZeroX + i, objZeroY + j)
+
+                    Me.interactionManager.checkRemove(gameobj.spriteMap(i, j), objZeroX + i, objZeroY + j) ' in the locationobj the gameobj wants to leave)
                 End If
             Next j
         Next i
@@ -113,25 +110,25 @@ Public Class Window
 
                         If validMove Then 'if can move, move it
                             Me.move(gameobject, gameobject.proposedMovement) 'removes+adds object
+
+
+
                             gameobject.proposedMovement = (0, 0)
                             gameobject.didChange = False
+
                         Else 'if cant move, need to call standing interaction
                             gameobject.didChange = False
-                            Me.interactionManager.checkStand()
+                            'Me.interactionManager.checkStand(gameobj)
                         End If
-
-
-
-
-
-
                     End If
+
+                    'placeholder for animations
 
 
                     gameobject.didChange = False
                 End While
             Else
-                'interactionmanager check for standing
+                'Me.interactionManager.checkStand(gameobj)
             End If
         Next
     End Sub

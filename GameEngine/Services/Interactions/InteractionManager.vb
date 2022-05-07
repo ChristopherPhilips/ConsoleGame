@@ -5,16 +5,55 @@
         Me.locationManager = locationManager
     End Sub
 
-    Sub checkEnter(charobject As CharObj, listoftypes As List(Of CharObj))  'called when an object enters a tile
+    Sub checkEnter(EnteringCharObj As CharObj, coordx As Integer, coordy As Integer)  'called when an object enters a tile
+        Dim MyCharobjType = EnteringCharObj.CharObjType
+        Dim listofCharObj = Me.locationManager.getCharObjs(coordx, coordy, EnteringCharObj.parentGameObj)
 
+        If Engine.CharacterManagers.ContainsKey(MyCharobjType) Then 'manager for the charobj leaving
+            Dim MyManager As ICharObjManager = Engine.CharacterManagers(MyCharobjType)
+
+            For Each charobj In listofCharObj
+                Dim OtherCharobjType = EnteringCharObj.CharObjType
+
+                If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
+                    Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
+                    OtherManager.Entering(EnteringCharObj)
+
+                End If
+
+                MyManager.onEnter(charobj)
+
+            Next
+
+        End If
     End Sub
 
-    Sub checkStand(charobject As CharObj, listoftypes As List(Of CharObj))  'called when an object ends a turn in a tiles they were already in
+    Sub checkStand(charobject As CharObj, coordx As Integer, coordy As Integer)  'called when an object ends a turn in a tiles they were already in
+        Dim MyCharobjType = charobject.CharObjType
+        Dim listofCharObj = Me.locationManager.getCharObjs(coordx, coordy, charobject.parentGameObj)
 
+        If Engine.CharacterManagers.ContainsKey(MyCharobjType) Then 'manager for the charobj leaving
+            Dim MyManager As ICharObjManager = Engine.CharacterManagers(MyCharobjType)
+
+            For Each charobj In listofCharObj
+                Dim OtherCharobjType = charobject.CharObjType
+
+                If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
+                    Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
+                    OtherManager.onAttemptedStand(charobject)
+
+                End If
+
+                MyManager.onStand(charobj)
+
+            Next
+
+        End If
     End Sub
 
-    Sub checkRemove(LeavingCharObj As CharObj, listofCharObj As List(Of CharObj)) 'called when an object leaves a tile
+    Sub checkRemove(LeavingCharObj As CharObj, coordx As Integer, coordy As Integer) 'called when an object leaves a tile
         Dim MyCharobjType = LeavingCharObj.CharObjType
+        Dim listofCharObj = Me.locationManager.getCharObjs(coordx, coordy, LeavingCharObj.parentGameObj)
 
         If Engine.CharacterManagers.ContainsKey(MyCharobjType) Then 'manager for the charobj leaving
             Dim MyManager As ICharObjManager = Engine.CharacterManagers(MyCharobjType)
@@ -24,30 +63,15 @@
 
                 If Engine.CharacterManagers.ContainsKey(charobj.CharObjType) Then 'manager for the charobj its leaving
                     Dim OtherManager As ICharObjManager = Engine.CharacterManagers(OtherCharobjType)
-                    OtherManager.onAttemptedLeave(MyCharobjType)
+                    OtherManager.Leaving(LeavingCharObj)
 
                 End If
 
-
-                'if it has methods
-                'call its onLeave method
-                'type.onLeave(charobj in,)
-
-                MyManager.onLeave(OtherCharobjType)
+                MyManager.onLeave(charobj)
 
             Next
 
         End If
-
-
-    End Sub
-    Sub checkAttemptedEnter(offendingcharobject As CharObj, defendingCharObject As CharObj) 'calls when an object wants to move out of or into a tile (think bouncy walls, turn attempted movement into backwards movement)
-
-    End Sub
-    Sub checkAttemptedStand(offendingcharobject As CharObj, defendingCharObject As CharObj) 'calls when an object wants to end turn on a tile 
-
-    End Sub
-    Sub checkAttemptedLeave(offendingcharobject As CharObj, defendingCharObject As CharObj) 'calls when an object wants to move out of a tile (think sticky floor)
 
     End Sub
 
@@ -61,9 +85,10 @@
             For j = 0 To gameobject.Width
                 If gameobject.occupying(i, j) Then 'check locationObj for each true in occupying
 
-                    Dim charObjsAtLocation As List(Of CharObj) = Me.locationManager.getCharObjs(topleftX + i, topleftY + j, gameobject)
+                    Dim charObjsAtNewLocation As List(Of CharObj) = Me.locationManager.getCharObjs(topleftX + i, topleftY + j, gameobject)
+                    Dim charObjsAtCurrentLocation As List(Of CharObj) = Me.locationManager.getCharObjs(gameobject.location.Item1 + i, gameobject.location.Item2 + j, gameobject)
 
-                    For Each charObj In charObjsAtLocation
+                    For Each charObj In charObjsAtNewLocation
 
                         Dim character As Char = charObj.CharObjType
                         If Engine.CharacterManagers.ContainsKey(character) Then 'if no manager assume no collision
@@ -71,14 +96,22 @@
                             Dim manager = Engine.CharacterManagers(character)
                             If manager.doIcollide().Contains(gameobject.spriteMap(i, j).CharObjType) Then
                                 validMove = False 'if character in question collide, move is invalid!
-                            Else
+                            End If
 
-                                manager.onAttemptedEnter()
+                            manager.onAttemptedEnter(gameobject.spriteMap(i, j))
+
                         End If
+                    Next
 
+                    For Each charObj In charObjsAtCurrentLocation
 
+                        Dim character As Char = charObj.CharObjType
+                        If Engine.CharacterManagers.ContainsKey(character) Then 'if no manager assume no collision
 
+                            Dim manager = Engine.CharacterManagers(character)
+                            manager.onAttemptedLeave(gameobject.spriteMap(i, j))
 
+                        End If
                     Next
                 End If
             Next
