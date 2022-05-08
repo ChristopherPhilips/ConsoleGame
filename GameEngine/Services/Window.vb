@@ -23,20 +23,20 @@ Public Class Window
     Public Sub move(gameobject As GameObj, deltaxy As (Integer, Integer)) 'just for window to use
         Me.RemoveGameObj(gameobject)
 
-        'move the gameoject
 
+        If gameobject.doIWantToMoveMyself Then
+            gameobject.MoveMyself(deltaxy)
+        Else
+            'move the gameoject
+            Dim oldx = gameobject.location.Item1
+            Dim newx = oldx + deltaxy.Item1
 
-
-        Dim oldx = gameobject.location.Item1
-        Dim newx = oldx + deltaxy.Item1
-
-        Dim oldy = gameobject.location.Item2
+            Dim oldy = gameobject.location.Item2
         Dim newy = oldy + deltaxy.Item2
 
-        gameobject.location = (newx, newy)
 
-
-
+            gameobject.location = (newx, newy)
+        End If
 
 
 
@@ -91,7 +91,7 @@ Public Class Window
         For i = 0 To gameobj.occupying.GetUpperBound(0) Step 1
             For j = 0 To gameobj.occupying.GetUpperBound(1) Step 1
                 If gameobj.occupying(i, j) Then
-
+                    'check this in a bit. Essential we changed objZeroX+i objZeroY+j to just i,j
                     Me.locationManager.RemoveChar(gameobj, i, j)
 
                     Me.interactionManager.checkRemove(gameobj.spriteMap(i, j), i, j) ' in the locationobj the gameobj wants to leave)

@@ -50,7 +50,14 @@ Module Program
 
         Dim menuY As Integer = centerOfgame - (80 / 2) '80 is width of title
         Dim menuX As Integer = 1
-        Dim MainMenusMenu As GameObj = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
+        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
+
+
+        game.addGameObj(Mainmenu, title)
+        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight))
+        game.addGameObj(Mainmenu, starMap)
+
+
 
         game.addGameObj(Mainmenu, MainMenusMenu)
 
