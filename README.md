@@ -1,10 +1,8 @@
 Our ConsoleGame, tentative name "RunningTillEmpty".
 Written in VB.net
 
-One day there will be a summary here.
-
-
-
+while this might say its a game, we actually spent all week making a game engine.
+there are lots of features we plan on adding in the near future, since the groundwork is already there.
 
 
 
