@@ -2,17 +2,23 @@
 Public Class StarMap 'creates items, 
     Inherits GameObj
     Implements KeyboardActionMethods
+    Implements IHasAnimation
+    Implements IAutonomous
 
     'Public Property animationChange As Boolean = False
 
+    Public Property AlwaysAnimate As Boolean = False
+    Public Property DoEvents As Boolean = False
 
-    Public Sub New(priority As Integer, location As (Integer, Integer), WidthHeight As (Integer, Integer))
+    Public Sub New(priority As Integer, location As (Integer, Integer), WidthHeight As (Integer, Integer), alwaysAnimate As Boolean, doEvents As Boolean)
         MyBase.New(priority, location, "none")
         Me.Height = WidthHeight.Item2 - 1
         Me.Width = WidthHeight.Item1 - 1
 
         Me.spriteMap = New CharObj(Height, Width) {}
         Me.occupying = New Boolean(Height, Width) {}
+        Me.AlwaysAnimate = alwaysAnimate
+        Me.DoEvents = doEvents
         InitialzeSpriteMap()
     End Sub
 
@@ -170,6 +176,25 @@ Public Class StarMap 'creates items,
 
         End If
 
+
+    End Sub
+
+    Public Sub Animate() Implements IHasAnimation.Animate
+        If Me.AlwaysAnimate Then
+            proposedMovement = (1, 0)
+            doIWantToMoveMyself = True
+            didChange = True
+        End If
+
+    End Sub
+
+    Public Sub DoWork() Implements IAutonomous.DoWork
+        If DoEvents Then
+            Dim ranNumer As Integer = Int((2000 * Rnd()) + 1)
+            If ranNumer = 3 Then
+                isActive = False
+            End If
+        End If
 
     End Sub
 End Class
