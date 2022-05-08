@@ -1,0 +1,56 @@
+{
+  "spritesheet": {
+
+    "init": {
+      "charmap": [
+        "QQQQQQQQ/==\\QQQQQQQQQQQQQQQQQQ",
+        "QQQQQQQ/=--=|QQQQQQQQQQQQQQQQQ",
+        "QQQ>=O/=---|-=)>QQQQQQQQQQQQQQ",
+        "QQQQQ|=|---\\--=\\QQQQQQQQQQQQQQ",
+        "QQQQ(}/=/|\\=\\=\\-\\\\>QQQQQQQQQQQ",
+        "Q>=O/ \\ db / \\+\\ +\\\\QQ,//=-=\\Q",
+        "QQQQ|( -oo- ) {   |=-=|     ()",
+        "Q>=O\\ / qp \\ /+/ +//QQ'\\\\=-=/Q",
+        "QQQQ(}\\=\\|/=/=/-//>QQQQQQQQQQQ",
+        "QQQQQ|=|---/--=/QQQQQQQQQQQQQQ",
+        "QQQ>=O\\=---|-=)>QQQQQQQQQQQQQQ",
+        "QQQQQQQ\\=--=|QQQQQQQQQQQQQQQQQ",
+        "QQQQQQQQ\\==/QQQQQQQQQQQQQQQQQQ"
+      ],
+      "colourmap": [
+        [ "", "", "", "", "", "", "", "", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "", "", "", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "darkorange3_1", "darkorange3_1", "silver", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "darkorange3_1", "silver", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "darkorange3_1", "darkorange3_1", "silver", "grey", "violet", "silver", "violet", "silver", "silver", "violet", "silver", "violet", "grey", "grey", "grey", "violet", "grey", "grey", "grey", "violet", "violet", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "violet" ],
+        [ "", "", "", "", "grey", "silver", "violet", "silver", "silver", "silver", "silver", "violet", "silver", "violet", "grey", "violet", "violet", "violet", "grey", "grey", "grey", "grey", "grey", "violet", "violet", "violet", "violet", "violet", "grey93", "grey93" ],
+        [ "", "darkorange3_1", "darkorange3_1", "silver", "grey", "violet", "silver", "violet", "silver", "silver", "violet", "silver", "violet", "grey", "grey", "grey", "violet", "grey", "grey", "grey", "violet", "violet", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "violet" ],
+        [ "", "", "", "", "darkorange3_1", "silver", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "darkorange3_1", "darkorange3_1", "silver", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "", "", "", "grey", "grey", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ],
+        [ "", "", "", "", "", "", "", "", "grey", "grey", "grey", "grey", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "", "" ]
+      ],
+      "typemap": [
+        "        SSSS                  ",
+        "       SSSSSS                 ",
+        "   SSSSSSSSSSSSS              ",
+        "     SSSSSSSSSSS              ",
+        "    SSSSSSSSSSSSSSS           ",
+        " SSSSSSSSSSSSSSSSSSS  SSSSSSS ",
+        "    SSSSSSSSSSSSSSSSSSSSSSSSSS",
+        " SSSSSSSSSSSSSSSSSSS  SSSSSSS ",
+        "    SSSSSSSSSSSSSSS           ",
+        "     SSSSSSSSSSS              ",
+        "   SSSSSSSSSSSSS              ",
+        "       SSSSSS                 ",
+        "        SSSS                  "
+      ]
+    },
+    "animations": {
+
+    }
+
+  }
+}

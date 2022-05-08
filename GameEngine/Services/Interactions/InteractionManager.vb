@@ -3,8 +3,6 @@
 
     Public Sub New(locationManager As LocationManager)
         Me.locationManager = locationManager
-
-
     End Sub
 
 

@@ -5,14 +5,14 @@
 
     "init": {
       "charmap": [
-        ",___       , ",
-        "{__  \\/ * -+-",
-        "{___ /\\ |  | "
+        ",___QQQQQQQ,Q",
+        "{__QQ\\/Q*Q-+-",
+        "{___Q/\\Q|QQ|Q"
       ],
       "colourmap": [
-        [ "white", "white", "white", "white", " ", " ", " ", " ", " ", " ", " ", "white", " " ],
-        [ "white", "white", "white", " ", " ", "white", "white", " ", "white", " ", "white", "white", "white" ],
-        [ "white", "white", "white", "white", " ", "white", "white", " ", "white", " ", " ", "white", " " ]
+        [ "white", "white", "white", "white", "", "", "", "", "", "", "", "white", "" ],
+        [ "white", "white", "white", "", "", "white", "white", "", "white", "", "white", "white", "white" ],
+        [ "white", "white", "white", "white", "", "white", "white", "", "white", "", "", "white", "" ]
       ]
     },
 
@@ -20,28 +20,28 @@
       "NotSelected": [
         {
           "charmap": [
-            ",___       , ",
-            "{__  \\/ * -+-",
-            "{___ /\\ |  | "
+            ",___QQQQQQQ,Q",
+            "{__QQ\\/Q*Q-+-",
+            "{___Q/\\Q|QQ|Q"
           ],
           "colourmap": [
-            [ "white", "white", "white", "white", " ", " ", " ", " ", " ", " ", " ", "white", " " ],
-            ["white","white","white"," "," ","white","white"," ","white"," ","white","white","white"],
-            ["white","white","white","white"," ","white","white"," ","white"," "," ","white"," "]
+            [ "white", "white", "white", "white", "", "", "", "", "", "", "", "white", "" ],
+            ["white","white","white","","","white","white","","white","","white","white","white"],
+            ["white","white","white","white","","white","white","","white","","","white",""]
           ]
         }
       ],
       "Selected": [
         {
           "charmap": [
-            ",___       , ",
-            "{__  \\/ * -+-",
-            "{___ /\\ |  | "
+            ",___QQQQQQQ,Q",
+            "{__QQ\\/Q*Q-+-",
+            "{___Q/\\Q|QQ|Q"
           ],
           "colourmap": [
-            [ "aqua", "aqua", "aqua", "aqua", " ", " ", " ", " ", " ", " ", " ", "aqua", " " ],
-            [ "aqua", "aqua", "aqua", " ", " ", "aqua", "aqua", " ", "aqua", " ", "aqua", "aqua", "aqua" ],
-            [ "aqua", "aqua", "aqua", "aqua", " ", "aqua", "aqua", " ", "aqua", " ", " ", "aqua", " " ]
+            [ "aqua", "aqua", "aqua", "aqua", "", "", "", "", "", "", "", "aqua", "" ],
+            [ "aqua", "aqua", "aqua", "", "", "aqua", "aqua", "", "aqua", "", "aqua", "aqua", "aqua" ],
+            [ "aqua", "aqua", "aqua", "aqua", "", "aqua", "aqua", "", "aqua", "", "", "aqua", "" ]
           ]
         }
       ]

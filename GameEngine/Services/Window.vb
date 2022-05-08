@@ -72,8 +72,11 @@ Public Class Window
 
                 'only add the charobjs that actually exist 'this is where "empty" space in the spriteMap is handled
                 If gameobject.spriteMap(i, j) IsNot Nothing Then
+                    If ourZeroX + i > 54 Then
+                        Dim hello = 5
+                    End If
 
-                    Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), i, j)
+                    Me.locationManager.AddCharObj(gameobject.spriteMap(i, j), ourZeroX + i, ourZeroY + j)
                     gameobject.occupying(i, j) = True
 
                     'interactionmanager check for add interactions
@@ -180,9 +183,6 @@ Public Class Window
 
     End Sub
 
-    Public Sub windowSizeReRender()
-
-    End Sub
 
     Public Sub KeyboardAction(keyboardaction As GameEnums.KeyboardActions)
         'gives charobjs that want keyboard commands thier commands
