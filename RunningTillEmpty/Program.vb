@@ -5,8 +5,8 @@ Imports System.IO
 Module Program
     Property pathToJsons As String = Path.Combine(Directory.GetCurrentDirectory(), "Assets/Sprites")
 
-    Property gameWidth As Integer = 140
-    Property gameHeight As Integer = 30
+    Property gameWidth As Integer = Console.WindowWidth - 5
+    Property gameHeight As Integer = Console.WindowHeight - 5
     Property centerOfgame As Integer = gameWidth / 2
 
 
@@ -44,7 +44,7 @@ Module Program
         game.setInActive(TravelScreen)
 
 
-        Dim endGameObject = New EndGameObject(1, (15, centerOfgame), Path.Combine(pathToJsons, "GameOverPopup.json"))
+        Dim endGameObject = New EndGameObject(1, (0, centerOfgame - 106 / 2), Path.Combine(pathToJsons, "GameOverPopup.json"))
         game.addGameObj(EndGameScreen, endGameObject)
         game.setInActive(EndGameScreen)
 
@@ -68,7 +68,7 @@ Module Program
 
         Dim menuY As Integer = centerOfgame - (86 / 2) '80 is width of title
         Dim menuX As Integer = 1
-        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth - 30, gameHeight - 1), MainMenuButtons)
+        Dim MainMenusMenu = New CenteredMenu(5, (0, centerOfgame - 106 / 2), (90, gameHeight - 1), MainMenuButtons)
 
         Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), True, False)
         game.addGameObj(Mainmenu, starMap)
