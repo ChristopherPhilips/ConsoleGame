@@ -1,3 +1,3 @@
 ﻿Public Interface IAutonomous
-    Sub DoWork()
+    Function DoWork() As WindowRequest
 End Interface

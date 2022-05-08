@@ -61,7 +61,11 @@ Public Class Window
             If TypeOf g Is IAutonomous Then
 
                 Dim work As IAutonomous = g
-                work.DoWork()
+                Dim windowRequest As WindowRequest = work.DoWork()
+                If windowRequest.SwitchToWindow <> "" Then
+                    setActive.Add(windowRequest.SwitchToWindow)
+                    isActive = False
+                End If
 
             End If
 

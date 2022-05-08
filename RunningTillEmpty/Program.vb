@@ -14,9 +14,10 @@ Module Program
     Property Mainmenu = game.CreateWindow("Main Menu", gameWidth, gameHeight)
     Property TravelScreen = game.CreateWindow("TravelScreen", gameWidth, gameHeight)
 
+    Property EndGameScreen = game.CreateWindow("EndGameScreen", gameWidth, gameHeight)
+
     Property objectTypes As Dictionary(Of Char, ICharObjManager) = New Dictionary(Of Char, ICharObjManager) From {}
     Sub Main(args As String())
-
 
         game.setCharacterManagers(objectTypes)
 
@@ -26,12 +27,21 @@ Module Program
 
         game.SetWindowLocation(Mainmenu, 1, 1) 'this method needs to center window
         game.SetWindowLocation(TravelScreen, 1, 1)
+        game.SetWindowLocation(EndGameScreen, 1, 1)
 
         game.setActive(Mainmenu)
         Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), False, True)
         game.addGameObj(TravelScreen, starMap)
 
+
+
         game.setInActive(TravelScreen)
+
+
+        Dim endGameObject = New EndGameObject(1, (15, centerOfgame), Path.Combine(pathToJsons, "GameOverPopup.json"))
+        game.addGameObj(EndGameScreen, endGameObject)
+        game.setInActive(EndGameScreen)
+
 
         game.start() 'this gives control to the gameengine
         'roll credits

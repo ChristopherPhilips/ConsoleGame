@@ -188,13 +188,15 @@ Public Class StarMap 'creates items,
 
     End Sub
 
-    Public Sub DoWork() Implements IAutonomous.DoWork
+    Public Function DoWork() As WindowRequest Implements IAutonomous.DoWork
+        Dim request = New WindowRequest
         If DoEvents Then
-            Dim ranNumer As Integer = Int((2000 * Rnd()) + 1)
+            Dim ranNumer As Integer = Int((200 * Rnd()) + 1)
             If ranNumer = 3 Then
                 isActive = False
+                request.SwitchToWindow = "EndGameScreen"
             End If
         End If
-
-    End Sub
+        Return request
+    End Function
 End Class

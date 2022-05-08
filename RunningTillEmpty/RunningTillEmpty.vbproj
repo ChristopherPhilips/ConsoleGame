@@ -21,6 +21,7 @@
 	<ItemGroup>
 	  <None Remove="Assets\Sprites\CrewMate_Blue.json" />
 	  <None Remove="Assets\Sprites\CrewMate_Red.json" />
+	  <None Remove="Assets\Sprites\GameOverPopup.json" />
 	  <None Remove="Assets\Sprites\SmallAsteroid.json" />
 	</ItemGroup>
 
@@ -29,6 +30,9 @@
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Assets\Sprites\CrewMate_Red.json">
+	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+	  </Content>
+	  <Content Include="Assets\Sprites\GameOverPopup.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
 	  <Content Include="Assets\Sprites\SmallAsteroid.json">
