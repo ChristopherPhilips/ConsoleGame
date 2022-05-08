@@ -51,6 +51,14 @@ Public Class Window
 
     Public Sub Print(topleftx As Integer, toplefty As Integer) 'writes renderedscreen to terminal
 
+        For Each g As GameObj In Me.activeGameObjects
+            If TypeOf g Is IHasAnimation Then
+
+                Dim animatable As IHasAnimation = g
+                animatable.Animate()
+
+            End If
+        Next
         Dim screen = Me.locationManager.RenderScreen()
 
         For i = 0 To screen.Count - 1 Step 1
