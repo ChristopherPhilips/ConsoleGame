@@ -3,6 +3,8 @@ Public Class StarMap 'creates items,
     Inherits GameObj
     Implements KeyboardActionMethods
 
+    'Public Property animationChange As Boolean = False
+
 
     Public Sub New(priority As Integer, location As (Integer, Integer), WidthHeight As (Integer, Integer))
         MyBase.New(priority, location, "none")
