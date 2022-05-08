@@ -23,6 +23,7 @@
 	  <None Remove="Assets\Sprites\CrewMate_Red.json" />
 	  <None Remove="Assets\Sprites\GameOverPopup.json" />
 	  <None Remove="Assets\Sprites\SmallAsteroid.json" />
+	  <None Remove="Assets\Sprites\SpaceShit8.json" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -38,6 +39,9 @@
 	  <Content Include="Assets\Sprites\SmallAsteroid.json">
 	    <CopyToOutputDirectory>Always</CopyToOutputDirectory>
 	  </Content>
+		<Content Include="Assets\Sprites\SpaceShit8.json">
+			<CopyToOutputDirectory>Always</CopyToOutputDirectory>
+		</Content>
 	</ItemGroup>
 
 	<ItemGroup>
@@ -47,6 +51,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\GameEngine\GameEngine.vbproj" />
 	</ItemGroup>
+
 
 	<ItemGroup>
 	  <None Update="Assets\Sprites\Exit.json">

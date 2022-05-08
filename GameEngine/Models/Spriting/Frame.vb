@@ -9,7 +9,7 @@ Public Class Frame 'renders a group of 4 (or less) maps into an array of char ob
     Public Property charObjArray As CharObj(,)
     Public Property Height
     Public Property Width
-    Private ReadOnly Property nullChar As Char = " "c 'char in charmap that indicated gameobj DOES NOT occupy that tile
+    Private ReadOnly Property nullChar As Char = "Q"c 'char in charmap that indicated gameobj DOES NOT occupy that tile
     Private ReadOnly Property invisChar As Char = "G"c 'Strings.ChrW(191) 'char in charmap that indicated gameobj DOES occupy that tile, but shouldn't be seen	
 
     Public Function render(parentGameObj As GameObj) As CharObj(,) 'turns 4 arrays into array of charobjs, called when we want the sprite
@@ -29,7 +29,6 @@ Public Class Frame 'renders a group of 4 (or less) maps into an array of char ob
                 Dim character As Char = charmap(i)(j) 'given char for the space
 
                 Dim charBuilder As System.Text.StringBuilder = New System.Text.StringBuilder(character)
-
 
                 If colourmap IsNot Nothing Then 'colour, default behavior is to do nothing
                     charBuilder.Insert(0, $"[{colourmap(i)(j)}]")

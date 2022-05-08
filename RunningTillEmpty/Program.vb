@@ -29,6 +29,12 @@ Module Program
         game.SetWindowLocation(TravelScreen, 1, 1)
         game.SetWindowLocation(EndGameScreen, 1, 1)
 
+
+        Dim spaceY As Integer = centerOfgame - 15
+        Dim spaceX As Integer = 1
+        Dim spaceshit8 As GameObj = New GameObj(10, (8, 20), Path.Combine(pathToJsons, "SpaceShit8.json"))
+        game.addGameObj(TravelScreen, spaceshit8)
+
         game.setActive(Mainmenu)
         Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), False, True)
         game.addGameObj(TravelScreen, starMap)
@@ -60,9 +66,9 @@ Module Program
         Dim exitGame As GameObj = New ExitButton(5, (0, 0), Path.Combine(pathToJsons, "Exit.json"), True)
         MainMenuButtons.Add(exitGame)
 
-        Dim menuY As Integer = centerOfgame - (80 / 2) '80 is width of title
+        Dim menuY As Integer = centerOfgame - (86 / 2) '80 is width of title
         Dim menuX As Integer = 1
-        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
+        Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth - 30, gameHeight - 1), MainMenuButtons)
 
         Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), True, False)
         game.addGameObj(Mainmenu, starMap)
@@ -73,5 +79,41 @@ Module Program
 
     End Sub
 
+    Function buildSpaceship8() As List(Of String)
+        Dim spaceshit8 As List(Of String) = New List(Of String) From {
+        "        /==\                  ",
+        "       /=--=|                 ",
+        "   >=O/=---|-=)>              ",
+        "     |=|---\--=\              ",
+        "    (}/=/|\=\=\-\\>           ",
+        " >=O/ \ db / \+\ +\\  ,//=-=\ ",
+        "    |( -oo- ) {   |=-=|     ()",
+        " >=O\ / qp \ /+/ +//  '\\=-=/ ",
+        "    (}\=\|/=/=/-//>           ",
+        "     |=|---/--=/              ",
+        "   >=O\=---|-=)>              ",
+        "       \=--=|                 ",
+        "        \==/                  "
+        }
+        '   Dim spaceshit82 As List(Of String) = New List(Of List(Of String)) From {
+        '   [" ", " ", " ", " ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", "yellow", "darkorange3_1", "maroon", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "red", "red", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", "darkorange3_1", "maroon", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "red", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", "yellow", "darkorange3_1", "maroon", "grey", " ", "grey", " ", "blue3_1", "blue3_1", " ", "grey", " ", "grey", "grey", "grey", " ", "grey", "grey", "grey", " ", " ", ",", "grey", "grey", "grey", "grey", "grey", "grey", " "],
+        '   [" ", " ", " ", " ", "grey", "silver", " ", "blue3_1", "blue3_1", "blue3_1", "blue3_1", " ", "silver", " ", "grey", " ", " ", " ", "grey", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", "grey93", "grey93"],
+        '   [" ", "yellow", "darkorange3_1", "maroon", "grey", " ", "grey", " ", "blue3_1", "blue3_1", " ", "grey", " ", "grey", "grey", "grey", " ", "grey", "grey", "grey", " ", " ", "'", "grey", "grey", "grey", "grey", "grey", "grey", " "],
+        '   [" ", " ", " ", " ", "darkorange3_1", "maroon", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "red", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", "yellow", "darkorange3_1", "maroon", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "grey", "red", "red", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
+        '   [" ", " ", " ", " ", " ", " ", " ", " ", "grey", "grey", "grey", "grey", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "]
+        '   }
+        'specialCharmap
+        'colourmap
+        'backgroundmap
 
+        Return spaceshit8
+    End Function
 End Module
