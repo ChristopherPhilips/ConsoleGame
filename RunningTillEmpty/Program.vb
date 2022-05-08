@@ -28,7 +28,7 @@ Module Program
         game.SetWindowLocation(TravelScreen, 1, 1)
 
         game.setActive(Mainmenu)
-        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), False)
+        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), False, True)
         game.addGameObj(TravelScreen, starMap)
 
         game.setInActive(TravelScreen)
@@ -54,7 +54,7 @@ Module Program
         Dim menuX As Integer = 1
         Dim MainMenusMenu = New CenteredMenu(5, (menuX, menuY), (gameWidth, gameHeight), MainMenuButtons)
 
-        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), True)
+        Dim starMap = New StarMap(1, (0, 0), (gameWidth, gameHeight), True, False)
         game.addGameObj(Mainmenu, starMap)
 
 

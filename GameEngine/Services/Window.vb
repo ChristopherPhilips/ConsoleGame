@@ -58,7 +58,19 @@ Public Class Window
                 animatable.Animate()
 
             End If
+            If TypeOf g Is IAutonomous Then
+
+                Dim work As IAutonomous = g
+                work.DoWork()
+
+            End If
+
         Next
+
+
+
+
+
         Dim screen = Me.locationManager.RenderScreen()
 
         For i = 0 To screen.Count - 1 Step 1
@@ -110,12 +122,15 @@ Public Class Window
     End Sub
 
     Public Sub updateGameObjs()
+        Dim NewactiveGameObjects As List(Of GameObj) = New List(Of GameObj)
         For Each gameobject In Me.activeGameObjects 'updates the sprites (in locationObjAry) for gameObjects reporting a change
 
             If gameobject.isActive = False Then 'way for gameobjects to turn themselves off
-                activeGameObjects.Remove(gameobject)
+                'activeGameObjects.Remove(gameobject)
                 inactiveGameObjects.Add(gameobject)
                 Continue For
+            Else
+                NewactiveGameObjects.Add(gameobject)
             End If
             'this if statement hold all of the possible kinds of checks we need to do for didChange gameobjects
             'requested movement
@@ -175,13 +190,16 @@ Public Class Window
 
 
         Next
-
+        activeGameObjects = NewactiveGameObjects
         'this loop wont work lol, removing from inside loop
+        Dim NewInactiveGameObjects As List(Of GameObj) = New List(Of GameObj)
         For Each gameobject In inactiveGameObjects 'way to toggle which gameobjects recieve updates
             If gameobject.isActive = True Then
                 Me.RemoveGameObj(gameobject)
-                inactiveGameObjects.Remove(gameobject)
+                'inactiveGameObjects.Remove(gameobject)
                 activeGameObjects.Add(gameobject)
+            Else
+                NewInactiveGameObjects.Add(gameobject)
             End If
         Next
 
