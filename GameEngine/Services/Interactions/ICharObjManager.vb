@@ -1,7 +1,10 @@
-﻿Public MustInherit Class ICharObjManager
+﻿Public Class ICharObjManager
 
     Public Property doIcollide As List(Of Char) = New List(Of Char) From {} 'who i collide with
 
+    Public Sub New()
+        Dim string3 = "sda"
+    End Sub
     Public Overridable Sub onEnter(otherCharObj As CharObj) 'when i enter 
     End Sub
     Public Overridable Sub onStand(otherCharObj As CharObj) 'when i end turn here
