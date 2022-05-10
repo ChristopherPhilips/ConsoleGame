@@ -1,8 +1,8 @@
 ﻿Public Class InteractionManager
     Private Property locationManager As LocationManager
 
-    Public Sub New(locationManager As LocationManager)
-        Me.locationManager = locationManager
+    Public Sub New()
+        Me.locationManager = Engine.Instance.GetLocationManager()
     End Sub
 
 
